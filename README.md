@@ -3,12 +3,10 @@
 > API for the various Knitting Machine project data
 
 
-***
-## API Endpoints
-***
 
-### Data Heirarchy:
-
+***
+## Data Heirarchy:
+***
 
 ```
 -- playlist
@@ -87,6 +85,58 @@
 }
 
 ```
+
+***
+## API Endpoints
+***
+
+## `/resources`
+
+### GET
+
+```
+
+```
+
+## `/sections`
+
+### GET
+
+```
+
+```
+
+### POST
+
+```
+
+```
+
+### PATCH
+
+```
+{$push[resources]: <resourceId>}
+```
+
+## `/playlists`
+
+### GET
+
+```
+
+```
+### POST
+
+```
+
+```
+
+### PATCH
+
+```
+{$push[sections]: <sectionId>}
+```
+
 
 <!--
 ### GET /resources
