@@ -31,16 +31,23 @@ module.exports = function (options = {}) {
 
     // if the get request is for all sections, return all
     } else{
+      
       let result = [];
       // if it is a playlist:
       if( context.path == "playlists"){
-        result =  await Model.find({}).populate('sections', {
+        result =  await Model.find({}).populate({
+                  path:'sections',
+                  populate:{
                     path:"resources",
                     model:"resources"
-                  }).exec();
+                  }}).exec();
+
+        console.log(result);
       // if it is a section:
       } else if ( context.path == "sections"){
         result = await Model.find({}).populate('resources').exec();
+
+        console.log(result);
       // if anything else:
       }
 
