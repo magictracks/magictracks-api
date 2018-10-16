@@ -3,6 +3,111 @@
 > API for the various Knitting Machine project data
 
 
+***
+## API Endpoints
+***
+
+### Data Heirarchy:
+
+
+```
+-- playlist
+  |
+  section
+    |
+    resource
+    |
+    resource
+    |
+    resource
+
+```
+
+- **Playlists**:
+  - A Playlist is an ordered list of Sections
+- **Sections**:
+  - A Section is an ordered list of Resources
+- **Resources**:
+  - A Resource is an individual, tagged and "enriched" hyperlink
+
+- **Tags**:
+  - tags are human generated tags for the resources, sections, and playlists to aid in search
+
+
+#### Playlists
+
+**Properties:**
+
+```
+{
+  title:"",
+  description:"",
+  url:"",
+  tags:[],
+  keywords:[],
+  createdBy:"",
+  sections:[]
+}
+```
+
+
+#### Sections
+
+**Properties:**
+
+```
+{
+  title:"",
+  description:"",
+  url:"",
+  tags:[],
+  keywords:[],
+  createdBy:"",
+  resources:[]
+}
+```
+
+
+
+#### Resources
+
+**Properties:**
+
+```
+{
+  title:"",
+  description:"",
+  url:"",
+  tags:[],
+  keywords:[],
+  submittedBy:[],
+  submissionCount: INT,
+  difficulty:"",
+  imageUrl:""
+}
+
+```
+
+<!--
+### GET /resources
+
+
+```
+<insert example endpoint here>
+```
+
+### GET /sections
+
+```
+<insert example endpoint here>
+```
+
+### GET /playlists
+
+```
+<insert example endpoint here>
+``` -->
+
 
 
 ***

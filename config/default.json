@@ -5,5 +5,30 @@
   "paginate": {
     "default": 10,
     "max": 50
-  }
+  },
+  "authentication": {
+    "secret": "fb47598a6873fb5a2be81cd2bb609306477ea46184b0ac343b012a52b899269bc1f8da275a6c0f4bd7f171bc14352558fc44ed313a03fd8a614fc137be2bc1513f18e526b4a3e44dc05469ae959f9950a327cfc4eb042c53941f7c3534c0cd9b635e2629ca5415218b152ddcd0364d258d9e4c6f0bc4365f11cbd3d10c36b9f298bfa523e5d1c8eeb133df1c954ba61a830d134dee53a8ded2aa6c69deb6b81a382115af753b0bae8793e92db25ed6f7b53a66ca060a4264a8e9e14f7dce3302ccf8d489e3c0dae5bd25614d8b40080ca891f148b3dd907f1c9bd98bc851db70b96dd0f68fb185481bcc3c822e7e78844c2bb5a7054a3cafc924295ade333f41",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/knittingmachine_api"
 }
