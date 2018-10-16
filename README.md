@@ -112,10 +112,28 @@
 
 ```
 
+
 ### PATCH
 
+#### Push a resource into the resources array with the `$push` operator
 ```
 {$push[resources]: <resourceId>}
+```
+
+#### Remove a resource from the resources array with the `$pull` operator
+```
+{$pull[resources]:<resourceId>}
+```
+
+#### Batch update the sections sending an array of section ids
+```
+http://localhost:3030/sections?_id=<id>&batch=true
+```
+
+takes:
+
+```
+{resourceList: ["<resourceId>", "<resourceId>", ...]}
 ```
 
 ## `/playlists`
@@ -131,12 +149,31 @@
 
 ```
 
+
 ### PATCH
 
+#### Push a section from the sections array with the `$push` operator
 ```
 {$push[sections]: <sectionId>}
 ```
 
+
+
+##### Remove a section from the sections array with the `$pull` operator
+```
+{$pull[sections]: <sectionId>}
+```
+
+#### Batch update the sections sending an array of section ids
+```
+http://localhost:3030/playlists?_id=<id>&batch=true
+```
+
+takes:
+
+```
+{sectionList: ["<sectionId>", "<sectionId>", ...]}
+```
 
 <!--
 ### GET /resources
