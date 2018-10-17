@@ -12,24 +12,38 @@ module.exports = function (app) {
     paginate
   };
 
-  // Initialize our service with any options it requires
-  app.use('/sections', createService(options));
 
-  // app.use('/sections/:id/test', {
-  //   async find(params){
-  //     const { id } = params.route;
-  //     const results = await app.service('sections').get(id);
-  //
-  //     let populated = results.populate("resources").exec();
-  //
-  //     // console.log("i'm the results", results);
-  //     return populated;
-  //   }
-  // });
-  //
+  /**
+  * GET
+  * /sections/all
+  * returns an ARRAY of the sections
+  */
+  app.use('/sections/all', {
+    async find(params){
+      const result = await Model.find({}).populate('resources').exec();
+      return result;
+    }
+  });
+  // app.service('/sections/:id/test').hooks(hooks);
+
+  /**
+  * GET
+  * /sections/id/:id
+  * returns a JSON of the requested section with the ID specified
+  */
+  app.use('/sections/id/:id', {
+    async find(params){
+      const {id} = params.route;
+
+      const result = await Model.findOne({_id:id}).populate('resources').exec();
+      return result;
+    }
+  });
   // app.service('/sections/:id/test').hooks(hooks);
 
 
+  // Initialize our service with any options it requires
+  app.use('/sections', createService(options));
   // Get our initialized service so that we can register hooks
   const service = app.service('sections');
 

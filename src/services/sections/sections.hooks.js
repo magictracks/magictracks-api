@@ -6,8 +6,8 @@ const batchListUpdate = require("../../hooks/batch-list-update");
 module.exports = {
   before: {
     all: [],
-    find: [populate()],
-    get: [populate()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [batchListUpdate()],
