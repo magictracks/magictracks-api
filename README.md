@@ -102,9 +102,20 @@
 
 ### GET
 
+#### /sections/all
+
+returns an array of all the sections
 ```
 
 ```
+
+#### /sections/id/<id>
+
+returns a JSON object of the section with the specified ObjectId in the db
+```
+
+```
+
 
 ### POST
 
