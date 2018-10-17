@@ -83,24 +83,66 @@
             <ul>
               <li>Resources
                 <ul>
-                  <li> <a href="#resources-findOne-example">findAll()</a> </li>
-                  <li> <a href="#resources-findById-example">findById()</a> </li>
-                  <li> <a href="#resources-create-example">create()</a> </li>
-                  <li> <a href="#resources-create-form-example">create() with form</a> </li>
-                  <li> <a href="#resources-deleteById-example">deleteById()</a> </li>
+                  <li>
+                    GET
+                    <ul>
+                      <li><a href="#resources-findOne-example">findAll()</a> </li>
+                      <li> <a href="#resources-findById-example">findById()</a> </li>
+                    </ul>
+                  </li>
+                  <li>
+                    CREATE
+                    <ul>
+                      <li> <a href="#resources-create-example">create()</a> </li>
+                      <li> <a href="#resources-create-form-example">create() with form</a> </li>
+                    </ul>
+                  </li>
+                  <li>
+                    DELETE
+                    <ul>
+                      <li> <a href="#resources-deleteById-example">deleteById()</a> </li>
+                    </ul>
+                  </li>
+                  <li>
+                    PATCH
+                    <ul>
+                      <li> <a href="#resources-patch-example">patch()</a> </li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
               <li>Sections
                 <ul>
-                  <li> <a href="#sections-findOne-example">findAll()</a> </li>
-                  <li> <a href="#sections-findById-example">findById()</a> </li>
-                  <li> <a href="#sections-create-example">create()</a> </li>
-                  <li> <a href="#sections-create-form-example">create() with form</a> </li>
-                  <li> <a href="#sections-deleteById-example">deleteById()</a> </li>
-                  <li> <a href="#">patch()</a> </li>
-                  <li> <a href="#">addResourceById()</a> </li>
-                  <li> <a href="#">removeResourceById()</a> </li>
-                  <li> <a href="#">batchAddResources()</a> </li>
+                  <li>
+                    GET
+                    <ul>
+                      <li> <a href="#sections-findOne-example">findAll()</a> </li>
+                      <li> <a href="#sections-findById-example">findById()</a> </li>
+                    </ul>
+                  </li>
+                  <li>
+                    CREATE
+                    <ul>
+                      <li> <a href="#sections-create-example">create()</a> </li>
+                      <li> <a href="#sections-create-form-example">create() with form</a> </li>
+                    </ul>
+                  </li>
+                  <li>
+                    DELETE
+                    <ul>
+                      <li> <a href="#sections-deleteById-example">deleteById()</a> </li>
+                    </ul>
+                  </li>
+                  <li>
+                    PATCH
+                    <ul>
+                      <li> <a href="#">patch()</a> </li>
+                      <li> <a href="#">addResourceById()</a> </li>
+                      <li> <a href="#">removeResourceById()</a> </li>
+                      <li> <a href="#">batchAddResources()</a> </li>
+                    </ul>
+                  </li>
+
                 </ul>
               </li>
               <li>Playlists
@@ -119,8 +161,16 @@
                   <li> <a href="#">batchAddSections()</a> </li>
                 </ul>
               </li>
-              <li>Tags</li>
-              <li>Users</li>
+              <li>Tags
+                <ul>
+                  <li>TBD</li>
+                </ul>
+              </li>
+              <li>Users
+                <ul>
+                  <li>TBD</li>
+                </ul>
+              </li>
             </ul>
           </nav>
 
@@ -263,6 +313,28 @@
                 </div>
             </article>
 
+            <article class="example columns col-12 resources-example" id="resources-patch-example">
+                <h3>/resources: patch()</h3>
+                <div class="divider"></div>
+                <div class="columns one-line col-12">
+                  <div class="column col-6">
+                    <div class="description">
+                        <p>patch - update and existing property - of a resource and leave the other properties alone</p>
+                    </div>
+                    <div class="url-endpoint">
+                        <p class="url-endpoint-title">patch the title property of a resource:</p>
+                        <p><code>{title:"woo hoo! super mega bueno"}</code></p>
+                    </div>
+                    <button class="btn" id="resources-patch">SUBMIT</button>
+                  </div>
+                  <div class="column col-6">
+                    <pre>
+                      <code id="resources-patch-result"></code>
+                    </pre>
+                  </div>
+                </div>
+            </article>
+
           </section> <!--  End section -->
 
 
@@ -292,6 +364,7 @@
           this.findAll = this.findAll.bind(this);
           this.findById = this.findById.bind(this);
           this.create = this.create.bind(this);
+          this.patch = this.patch.bind(this);
         }
 
 
@@ -352,6 +425,20 @@
                 _id:id
               }
             });
+            return response;
+          } catch(err){
+            return err
+          }
+        }
+
+        /**
+         * findById()
+         * find 1 resource by the id
+         * { query: { status: 'read', user: '10' } }
+         */
+        async patch(id, payload){
+          try{
+            let response = await resources.patch(id, payload);
             return response;
           } catch(err){
             return err
@@ -420,8 +507,13 @@
         document.querySelector("#resources-deleteById-result").innerHTML = JSON.stringify(result);
       })
 
+      document.querySelector("#resources-patch").addEventListener("click", async function(e){
+        let result = await resourceAPI.patch("5bc507165686ad95c5929953", {title:"woo hoo! super mega bueno"});
+        document.querySelector("#resources-patch-result").innerHTML = JSON.stringify(result);
+      })
 
-      // resourceAPI.create(dummyResourceData).then((data, err)=>{
+
+      // resourceAPI.patch("5bc74501ac401e06a53fe5c7",).then((data, err)=>{
       //   console.log(data);
       // });
 
