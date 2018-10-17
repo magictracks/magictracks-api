@@ -4,82 +4,21 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
-
-    <style>
-
-      *{
-        margin:0;
-        box-sizing: border-box;
-        font-family: sans-serif;
-        color:black;
-      }
-
-      body{
-        width:100%;
-        height:100%;
-      }
-      main{
-        width:100%;
-        height:100%;
-      }
-      nav{
-        margin-top:20px;
-      }
-
-      article{
-        margin: 20px 0px 20px 0px;
-      }
-
-      .example{
-        /* border: 2px solid black; */
-        display: flex;
-        max-height:400px;
-        overflow-y: auto;
-        padding:10px 10px 40px 10px;
-      }
-      .example .code{
-        overflow:auto;
-      }
-
-      pre {
-          white-space: pre-wrap;       /* Since CSS 2.1 */
-          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-          white-space: -pre-wrap;      /* Opera 4-6 */
-          white-space: -o-pre-wrap;    /* Opera 7 */
-          word-wrap: break-word;       /* Internet Explorer 5.5+ */
-          background-color: #fafafa;
-          padding:4px 4px 4px 4px;
-      }
-
-      .divider{
-        width:100%;
-      }
-      button{
-        margin:10px 0px;
-      }
-
-      #api-examples{
-      }
-
-      .resources-example{
-        background-color: #fff8e1;
-      }
-
-      .sections-example{
-        background-color: #e8eaf6;
-      }
-
-      .playlists-example{
-        background-color:#fce4ec;
-      }
-
-    </style>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <main class="container">
         <section class="columns col-12 one-line">
           <nav class="column col-4">
-            <h1>Knitting Machine API</h1>
+            <div class="columns one-line col-12">
+              <div class="col-3">
+                <img src="https://raw.githubusercontent.com/knittingmachine/knittingmachine-docs/master/assets/images/scarf-with-eyes.png" alt="scarf with eyes" class="logo">
+              </div>
+              <div class="col-9">
+                <h1>Knitting Machine API</h1>
+              </div>
+            </div>
+
             <ul>
               <li>Resources
                 <ul>
@@ -341,183 +280,6 @@
     </main>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
-    <script>
-      var app = feathers();
-      // Connect to a different URL
-      var restClient = feathers.rest('http://localhost:3030')
-
-      // Configure an AJAX library (see below) with that client
-      app.configure(restClient.fetch(window.fetch));
-
-      // Connect to the `http://localhost:3030/resources` service
-      const resources = app.service('resources');
-      const sections = app.service('sections');
-      const playlists = app.service('playlists');
-
-
-      /**
-       * RESOURCE API CALLS
-       */
-      class ResourceAPI {
-        constructor(){
-
-          this.findAll = this.findAll.bind(this);
-          this.findById = this.findById.bind(this);
-          this.create = this.create.bind(this);
-          this.patch = this.patch.bind(this);
-        }
-
-
-        /**
-         * findAll()
-         * returns all the resources
-         */
-         async findAll(){
-           try{
-             let response = await resources.find({});
-             return response;
-           } catch(err){
-             return err;
-           }
-        }
-
-        /**
-         * findById()
-         * find 1 resource by the id
-         * { query: { status: 'read', user: '10' } }
-         */
-        async findById(id){
-          try{
-            let response = await resources.find({
-              query:{
-                _id:id
-              }
-            });
-            return response;
-          } catch(err){
-            return err
-          }
-        }
-
-        /**
-         * create()
-         * find 1 resource by the id
-         * { query: { status: 'read', user: '10' } }
-         */
-        async create(resourceObj){
-          try{
-            let response = await resources.create(resourceObj);
-            return response;
-          } catch(err){
-            return err
-          }
-        }
-
-        /**
-         * findById()
-         * find 1 resource by the id
-         * { query: { status: 'read', user: '10' } }
-         */
-        async deleteById(id){
-          try{
-            let response = await resources.delete({
-              query:{
-                _id:id
-              }
-            });
-            return response;
-          } catch(err){
-            return err
-          }
-        }
-
-        /**
-         * findById()
-         * find 1 resource by the id
-         * { query: { status: 'read', user: '10' } }
-         */
-        async patch(id, payload){
-          try{
-            let response = await resources.patch(id, payload);
-            return response;
-          } catch(err){
-            return err
-          }
-        }
-
-
-      }
-
-      const resourceAPI = new ResourceAPI();
-
-
-
-      // resources-findAll
-      document.querySelector("#resources-findAll").addEventListener("click", async function(e){
-        let result = await resourceAPI.findAll();
-
-        document.querySelector("#resources-findAll-result").innerHTML = JSON.stringify(result.data);
-      })
-
-      // resources-findById
-      document.querySelector("#resources-findById").addEventListener("click", async function(e){
-        let result = await resourceAPI.findById("5bc507165686ad95c5929953");
-        document.querySelector("#resources-findbyId-result").innerHTML = JSON.stringify(result.data);
-      })
-
-
-
-      document.querySelector("#resources-create").addEventListener("click", async function(e){
-        let dummyResourceData = {
-          title:"Test from API, Random Number: " + Math.random()*100,
-          description: "Test from API, Random Number: " + Math.random()*100,
-          url:"DELETEME",
-          keywords: ["TEST", "TEST"],
-          difficulty:["BEGINNER"],
-          imageUrl:"https://raw.githubusercontent.com/knittingmachine/knittingmachine-docs/master/docs/concept/illustrations/img/frustrated-student.png"
-        }
-
-        let result = await resourceAPI.create(dummyResourceData);
-        document.querySelector("#resources-create-result").innerHTML = JSON.stringify(result);
-      })
-
-
-      document.querySelector("#resources-create-form").addEventListener("submit", async function(e){
-        e.preventDefault();
-
-        console.log(e.target);
-        let form = new FormData(e.target)
-
-        let dummyResourceData = {
-          title: form.get("title"),
-          description: form.get("description"),
-          url: form.get("url"),
-          keywords:["TEST", "AUTOMATED"],
-          difficulty: form.get("difficulty"),
-          imageUrl: form.get("imageUrl")
-        }
-
-        let result = await resourceAPI.create(dummyResourceData);
-        document.querySelector("#resources-create-form-result").innerHTML = JSON.stringify(result);
-      })
-
-      // delete by id
-      document.querySelector("#resources-deleteById").addEventListener("click", async function(e){
-        let result = await resourceAPI.deleteById("5bc507165686ad95c5929953");
-        document.querySelector("#resources-deleteById-result").innerHTML = JSON.stringify(result);
-      })
-
-      document.querySelector("#resources-patch").addEventListener("click", async function(e){
-        let result = await resourceAPI.patch("5bc507165686ad95c5929953", {title:"woo hoo! super mega bueno"});
-        document.querySelector("#resources-patch-result").innerHTML = JSON.stringify(result);
-      })
-
-
-      // resourceAPI.patch("5bc74501ac401e06a53fe5c7",).then((data, err)=>{
-      //   console.log(data);
-      // });
-
-
-    </script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
