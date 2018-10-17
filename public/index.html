@@ -10,8 +10,8 @@
       *{
         margin:0;
         box-sizing: border-box;
-        font-family: 'Andale Mono', serif;
-        fo
+        font-family: sans-serif;
+        color:black;
       }
 
       body{
@@ -22,19 +22,22 @@
         width:100%;
         height:100%;
       }
+      nav{
+        margin-top:20px;
+      }
 
-      section{
-        margin:40px;
-        padding:20px;
+      article{
+        margin: 20px 0px 20px 0px;
       }
 
       .example{
         border: 2px solid black;
-        padding:20px;
         display: flex;
+        max-height:400px;
+        overflow-y: auto;
+        padding:10px 10px 40px 10px;
       }
       .example .code{
-        padding:20px;
         overflow:auto;
       }
 
@@ -44,108 +47,150 @@
           white-space: -pre-wrap;      /* Opera 4-6 */
           white-space: -o-pre-wrap;    /* Opera 7 */
           word-wrap: break-word;       /* Internet Explorer 5.5+ */
+          background-color: #e7e7e7;
+          padding:4px 4px 4px 4px;
+      }
+
+      .divider{
+        width:100%;
+      }
+      button{
+        margin:10px 0px;
       }
     </style>
   </head>
   <body>
     <main class="container">
-
-
-        <section class="columns">
+        <section class="columns col-12 one-line">
+          <nav class="column col-4">
             <h1>Knitting Machine API</h1>
+            <ul>
+              <li>Resources</li>
+              <li>Sections</li>
+              <li>Playlists</li>
+              <li>Tags</li>
+              <li>Users</li>
+            </ul>
+          </nav>
 
-            <h2>/resources</h2>
+          <section class="column col-8">
             <!-- FIND ONE EXAMPLE -->
-            <section id="resources-findOne-example">
-              <h4>/resources: findAll()</h4>
-              <div class="example columns col-12 one-line">
-                <div class="column col-6">
-                  <p>find all the resources and send back an array</p>
-                  <button id="resources-findAll">SUBMIT</button>
+            <article class="example columns col-12" id="resources-findOne-example">
+                <h3>/resources: findAll()</h3>
+                <div class="divider"></div>
+                <div class="columns one-line col-12">
+                  <div class="column col-6">
+                    <div class="description">
+                        <p>find all the resources and send back an array</p>
+                    </div>
+                    <div class="url-endpoint">
+                        <p class="url-endpoint-title">URL example:</p>
+                        <p><code>http://localhost:3030/resources</code></p>
+                    </div>
+                    <button class="btn" id="resources-findAll">SUBMIT</button>
+                  </div>
+                  <div class="column col-6">
+                    <pre>
+                      <code id="resources-findAll-result"></code>
+                    </pre>
+                  </div>
                 </div>
-                <div class="column col-6">
-                  <pre>
-                    <code id="resources-findAll-result"></code>
-                  </pre>
-                </div>
-              </div>
-            </section>
+            </article>
 
             <!-- FIND ONE BY ID -->
-            <section id="resources-findById-example">
-              <h4>/resources: findById()</h4>
-              <div class="example columns col-12 one-line">
-                <div class="column col-6">
-                  <p>find one resource by it's ID and send back an JSON object</p>
-                  <button id="resources-findById">SUBMIT</button>
+            <article class="example columns col-12" id="resources-findById-example">
+                <h3>/resources: findById()</h3>
+                <div class="divider"></div>
+                <div class="columns one-line col-12">
+                  <div class="column col-6">
+                    <div class="description">
+                        <p>find one resource by it's ID and send back an JSON object</p>
+                    </div>
+                    <div class="url-endpoint">
+                        <p class="url-endpoint-title">URL example:</p>
+                        <pre><code>http://localhost:3030/resources?_id=5bc507165686ad95c5929953</code></pre>
+                    </div>
+                    <button class="btn" id="resources-findById">SUBMIT</button>
+                  </div>
+                  <div class="column col-6">
+                    <pre>
+                      <code id="resources-findById-result"></code>
+                    </pre>
+                  </div>
                 </div>
-                <div class="column col-6">
-                  <pre>
-                    <code id="resources-findById-result"></code>
-                  </pre>
-                </div>
-              </div>
-            </section>
+            </article>
 
             <!-- POST RANDOM -->
-            <section id="resources-create-example">
-              <h4>/resources: create()</h4>
-              <div class="example columns col-12 one-line">
-                <div class="column col-6">
-                  <p>create a new resource and send back the new JSON object</p>
-                  <button id="resources-create">SUBMIT</button>
+            <article class="example columns col-12" id="resources-create-example">
+                <h3>/resources: create()</h3>
+                <div class="divider"></div>
+                <div class="columns one-line col-12">
+                  <div class="column col-6">
+                    <div class="description">
+                        <p>create a new resource and send back the new JSON object</p>
+                    </div>
+                    <div class="url-endpoint">
+                        <p class="url-endpoint-title">data being sent:</p>
+                        <pre><code>
+                      {
+                        title:"Test from API, Random Number: " + Math.random()*100,
+                        description: "Test from API, Random Number: " + Math.random()*100,
+                        url:"DELETEME",
+                        keywords: ["TEST", "TEST"],
+                        difficulty:["BEGINNER"],
+                        imageUrl:"https://raw.githubusercontent.com/knittingmachine/knittingmachine-docs/master/docs/concept/illustrations/img/frustrated-student.png"
+                      }
+                      </code></pre>
+                    </div>
+                    <button class="btn" id="resources-create">SUBMIT</button>
+                  </div>
+                  <div class="column col-6">
+                    <pre>
+                      <code id="resources-create-result"></code>
+                    </pre>
+                  </div>
                 </div>
-                <div class="column col-6">
-                  <pre>
-                    <code id="resources-create-result"></code>
-                  </pre>
-                </div>
-              </div>
-            </section>
+            </article>
+
 
             <!-- POST -->
-            <section id="resources-create-example-form">
-              <h4>/resources: create()</h4>
-              <div class="example columns col-12 one-line">
-                <div class="column col-6">
-                  <p>create a new resource with form inputs and send back the new JSON object</p>
-                  <form id="resources-create-form" method="post">
-                    <input type="text" name="title" value="" placeholder="title">
-                    <input type="text" name="description" value="" placeholder="description">
-                    <input type="text" name="url" value="" placeholder="url">
-                    <input type="text" name="imageUrl" value="" placeholder="imageUrl">
-                    <fieldset>
-                      <legend>Difficulty</legend>
-                      <label for="create-beginner">beginner</label>
-                      <input id="create-beginner" type="radio" name="difficulty" value="beginner">
-                      <label for="create-intermediate">intermediate</label>
-                      <input id="create-intermediate" type="radio" name="difficulty" value="intermediate">
-                      <label for="create-advanced">advanced</label>
-                      <input id="create-advanced" type="radio" name="difficulty" value="advanced">
-                    </fieldset>
-                    <input type="submit" name="submit" value="SUBMIT">
-                  </form>
+            <article class="example columns col-12" id="resources-create-example-form">
+                <h3>/resources: create()</h3>
+                <div class="divider"></div>
+                <div class="columns one-line col-12">
+                  <div class="column col-6">
+                    <div class="description">
+                        <p>create a new resource with form inputs and send back the new JSON object</p>
+                    </div>
+                    <div class="url-endpoint">
+                        <form id="resources-create-form" method="post">
+                          <input type="text" name="title" value="" placeholder="title">
+                          <input type="text" name="description" value="" placeholder="description">
+                          <input type="text" name="url" value="" placeholder="url">
+                          <input type="text" name="imageUrl" value="" placeholder="imageUrl">
+                          <fieldset>
+                            <legend>Difficulty</legend>
+                            <label for="create-beginner">beginner</label>
+                            <input id="create-beginner" type="radio" name="difficulty" value="beginner">
+                            <label for="create-intermediate">intermediate</label>
+                            <input id="create-intermediate" type="radio" name="difficulty" value="intermediate">
+                            <label for="create-advanced">advanced</label>
+                            <input id="create-advanced" type="radio" name="difficulty" value="advanced">
+                          </fieldset>
+                          <input class="btn" type="submit" name="submit" value="SUBMIT">
+                        </form>
+                    </div>
+                  </div>
+                  <div class="column col-6">
+                    <pre>
+                      <code id="resources-create-form-result"></code>
+                    </pre>
+                  </div>
                 </div>
-                <div class="column col-6">
-                  <pre>
-                    <code id="resources-create-form-result"></code>
-                  </pre>
-                </div>
-              </div>
-            </section>
+            </article>
 
+          </section> <!--  End section -->
 
-
-            <h2>/sections</h2>
-
-
-            <h2>/playlists</h2>
-
-        </section>
-
-        <section class="columns">
-            <h2>POST</h2>
-        </section>
 
     </main>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
@@ -246,9 +291,11 @@
       const resourceAPI = new ResourceAPI();
 
 
+
       // resources-findAll
       document.querySelector("#resources-findAll").addEventListener("click", async function(e){
         let result = await resourceAPI.findAll();
+
         document.querySelector("#resources-findAll-result").innerHTML = JSON.stringify(result.data);
       })
 
