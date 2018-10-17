@@ -31,7 +31,7 @@
       }
 
       .example{
-        border: 2px solid black;
+        /* border: 2px solid black; */
         display: flex;
         max-height:400px;
         overflow-y: auto;
@@ -47,7 +47,7 @@
           white-space: -pre-wrap;      /* Opera 4-6 */
           white-space: -o-pre-wrap;    /* Opera 7 */
           word-wrap: break-word;       /* Internet Explorer 5.5+ */
-          background-color: #e7e7e7;
+          background-color: #fafafa;
           padding:4px 4px 4px 4px;
       }
 
@@ -57,6 +57,22 @@
       button{
         margin:10px 0px;
       }
+
+      #api-examples{
+      }
+
+      .resources-example{
+        background-color: #fff8e1;
+      }
+
+      .sections-example{
+        background-color: #e8eaf6;
+      }
+
+      .playlists-example{
+        background-color:#fce4ec;
+      }
+
     </style>
   </head>
   <body>
@@ -65,17 +81,52 @@
           <nav class="column col-4">
             <h1>Knitting Machine API</h1>
             <ul>
-              <li>Resources</li>
-              <li>Sections</li>
-              <li>Playlists</li>
+              <li>Resources
+                <ul>
+                  <li> <a href="#resources-findOne-example">findAll()</a> </li>
+                  <li> <a href="#resources-findById-example">findById()</a> </li>
+                  <li> <a href="#resources-create-example">create()</a> </li>
+                  <li> <a href="#resources-create-form-example">create() with form</a> </li>
+                  <li> <a href="#resources-deleteById-example">deleteById()</a> </li>
+                </ul>
+              </li>
+              <li>Sections
+                <ul>
+                  <li> <a href="#sections-findOne-example">findAll()</a> </li>
+                  <li> <a href="#sections-findById-example">findById()</a> </li>
+                  <li> <a href="#sections-create-example">create()</a> </li>
+                  <li> <a href="#sections-create-form-example">create() with form</a> </li>
+                  <li> <a href="#sections-deleteById-example">deleteById()</a> </li>
+                  <li> <a href="#">patch()</a> </li>
+                  <li> <a href="#">addResourceById()</a> </li>
+                  <li> <a href="#">removeResourceById()</a> </li>
+                  <li> <a href="#">batchAddResources()</a> </li>
+                </ul>
+              </li>
+              <li>Playlists
+                <ul>
+                  <li> <a href="#playlists-findOne-example">findAll()</a> </li>
+                  <li> <a href="#playlists-findById-example">findById()</a> </li>
+                  <li> <a href="#playlists-create-example">create()</a> </li>
+                  <li> <a href="#playlists-create-form-example">create() with form</a> </li>
+                  <li> <a href="#playlists-deleteById-example">deleteById()</a> </li>
+                  <li> <a href="#">patch()</a> </li>
+                  <li> <a href="#">addResourceById()</a> </li>
+                  <li> <a href="#">removeResourceById()</a> </li>
+                  <li> <a href="#">batchAddResources()</a> </li>
+                  <li> <a href="#">addSectionById()</a> </li>
+                  <li> <a href="#">removeSectionById()</a> </li>
+                  <li> <a href="#">batchAddSections()</a> </li>
+                </ul>
+              </li>
               <li>Tags</li>
               <li>Users</li>
             </ul>
           </nav>
 
-          <section class="column col-8">
+          <section id="api-examples" class="column col-8">
             <!-- FIND ONE EXAMPLE -->
-            <article class="example columns col-12" id="resources-findOne-example">
+            <article class="example columns col-12 resources-example" id="resources-findOne-example">
                 <h3>/resources: findAll()</h3>
                 <div class="divider"></div>
                 <div class="columns one-line col-12">
@@ -98,7 +149,7 @@
             </article>
 
             <!-- FIND ONE BY ID -->
-            <article class="example columns col-12" id="resources-findById-example">
+            <article class="example columns col-12 resources-example" id="resources-findById-example">
                 <h3>/resources: findById()</h3>
                 <div class="divider"></div>
                 <div class="columns one-line col-12">
@@ -121,7 +172,7 @@
             </article>
 
             <!-- POST RANDOM -->
-            <article class="example columns col-12" id="resources-create-example">
+            <article class="example columns col-12 resources-example" id="resources-create-example">
                 <h3>/resources: create()</h3>
                 <div class="divider"></div>
                 <div class="columns one-line col-12">
@@ -154,8 +205,8 @@
 
 
             <!-- POST -->
-            <article class="example columns col-12" id="resources-create-example-form">
-                <h3>/resources: create()</h3>
+            <article class="example columns col-12 resources-example" id="resources-create-example-form">
+                <h3>/resources: create() with form</h3>
                 <div class="divider"></div>
                 <div class="columns one-line col-12">
                   <div class="column col-6">
@@ -184,6 +235,29 @@
                   <div class="column col-6">
                     <pre>
                       <code id="resources-create-form-result"></code>
+                    </pre>
+                  </div>
+                </div>
+            </article>
+
+            <!-- delete by id -->
+            <article class="example columns col-12 resources-example" id="resources-deleteById-example">
+                <h3>/resources: deleteById()</h3>
+                <div class="divider"></div>
+                <div class="columns one-line col-12">
+                  <div class="column col-6">
+                    <div class="description">
+                        <p>delete a resource by a specified id if it exists</p>
+                    </div>
+                    <div class="url-endpoint">
+                        <p class="url-endpoint-title">URL example:</p>
+                        <p><code>http://localhost:3030/resources?_id=5bc74501ac401e06a53fe5c7</code></p>
+                    </div>
+                    <button class="btn" id="resources-deleteById">SUBMIT</button>
+                  </div>
+                  <div class="column col-6">
+                    <pre>
+                      <code id="resources-deleteById-result"></code>
                     </pre>
                   </div>
                 </div>
@@ -285,7 +359,6 @@
         }
 
 
-
       }
 
       const resourceAPI = new ResourceAPI();
@@ -339,6 +412,12 @@
 
         let result = await resourceAPI.create(dummyResourceData);
         document.querySelector("#resources-create-form-result").innerHTML = JSON.stringify(result);
+      })
+
+      // delete by id
+      document.querySelector("#resources-deleteById").addEventListener("click", async function(e){
+        let result = await resourceAPI.deleteById("5bc507165686ad95c5929953");
+        document.querySelector("#resources-deleteById-result").innerHTML = JSON.stringify(result);
       })
 
 
