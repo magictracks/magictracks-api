@@ -90,121 +90,98 @@
 ## API Endpoints
 ***
 
-## `/resources`
+## Resources
 
-### GET
+API endpoints for the resources database
+
+
+## `/resources/all`
+
+### GET: `/resources/all`
+
+* returns an ARRAY of the sections
 
 ```
+```
+
+## `/resources/id/:id`
+
+### GET: `/resources/id/:id`
+
+* finds the data by id and returns it
 
 ```
+```
+
+### PATCH: `/resources/id/:id`
+
+* finds the data by id and returns the updated data
+
+```
+```
+
+### DELETE: `/resources/id/:id`
+
+* finds the data by id and returns "resource removed" when it has been removed
+
+```
+```
+
+## Sections
+
+API endpoints for the sections database
 
 ## `/sections`
 
-### GET
+## `/sections/all`
 
-#### /sections/all
+### GET: `/sections/all`
 
-returns an array of all the sections
+* returns an array of all the sections
+```
 ```
 
-```
+## `/sections/id/:id`
 
-#### /sections/id/<id>
+### GET: `/sections/id/:id`
 
-returns a JSON object of the section with the specified ObjectId in the db
-```
-
-```
-
-
-### POST
+* returns a JSON object of the section with the specified ObjectId in the db
 
 ```
-
 ```
 
+### PATCH: `/sections/id/:id`
 
-### PATCH
-
-#### Push a resource into the resources array with the `$push` operator
-```
-{$push[resources]: <resourceId>}
-```
-
-#### Remove a resource from the resources array with the `$pull` operator
-```
-{$pull[resources]:<resourceId>}
-```
-
-#### Batch update the sections sending an array of section ids
-```
-http://localhost:3030/sections?_id=<id>&batch=true
-```
-
-takes:
+* returns a json of the updated values.
+* NOTE: if you want to $push or remove values from an array, see:
+  * /sections/id/:id/appendOne/:property/
+  * /sections/id/:id/removeOne/:property/
 
 ```
-{resourceList: ["<resourceId>", "<resourceId>", ...]}
 ```
 
-## `/playlists`
+### DELETE: `/sections/id/:id`
 
-### GET
-
+* * using the id provided, remove the specified section from the database
+* sends "section removed" in a {} as as response
 ```
-
-```
-### POST
-
-```
-
 ```
 
 
-### PATCH
+## `/sections/id/:id/appendOne/:property`
 
-#### Push a section from the sections array with the `$push` operator
-```
-{$push[sections]: <sectionId>}
-```
+### PATCH: `/sections/id/:id/appendOne/:property`
 
+* using the property specified in the URL, push one value from the payload to that array
 
+## `/sections/id/:id/removeOne/:property`
 
-##### Remove a section from the sections array with the `$pull` operator
-```
-{$pull[sections]: <sectionId>}
-```
+### PATCH: `/sections/id/:id/removeOne/:property`
 
-#### Batch update the sections sending an array of section ids
-```
-http://localhost:3030/playlists?_id=<id>&batch=true
-```
-
-takes:
-
-```
-{sectionList: ["<sectionId>", "<sectionId>", ...]}
-```
-
-<!--
-### GET /resources
+* using the property specified in the URL, pull the value specified from that array
 
 
-```
-<insert example endpoint here>
-```
 
-### GET /sections
-
-```
-<insert example endpoint here>
-```
-
-### GET /playlists
-
-```
-<insert example endpoint here>
-``` -->
 
 
 

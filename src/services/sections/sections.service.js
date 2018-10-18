@@ -77,12 +77,13 @@ module.exports = function(app) {
      * REMOVE
      * @param {*} _id
      * @param {*} params
+     * using the id provided, remove the specified section from the database
      */
     async remove(_id, params) {
       try {
         const { id } = params.route;
         const result = await Model.deleteOne({ _id: id });
-        return { message: "resource removed!" };
+        return { message: "section removed!" };
       } catch (err) {
         return { message: err };
       }

@@ -75,6 +75,7 @@ module.exports = function(app) {
      * REMOVE
      * @param {*} _id
      * @param {*} params
+     * finds the data by id and returns "resource removed" when it has been removed
      */
     async remove(_id, params) {
       try {
