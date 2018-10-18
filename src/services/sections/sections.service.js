@@ -40,11 +40,15 @@ module.exports = function(app) {
      * returns a JSON of the requested section with the ID specified
      */
     async find(params) {
-      const { id } = params.route;
-      const result = await Model.findOne({ _id: id })
-        .populate("resources")
-        .exec();
-      return result;
+      try {
+        const { id } = params.route;
+        const result = await Model.findOne({ _id: id })
+          .populate("resources")
+          .exec();
+        return result;
+      } catch (err) {
+        return err;
+      }
     },
     /**
      * PATCH()
@@ -53,16 +57,35 @@ module.exports = function(app) {
      * NOTE: if you want to $push or remove values from an array, see /sections/<action>/:property/id/:id
      */
     async patch(_id, data, params) {
-      const { id } = params.route;
-      const result = await Model.findByIdAndUpdate(
-        id,
-        { $set: data },
-        { new: true }
-      )
-        .populate("resources")
-        .exec();
+      try {
+        const { id } = params.route;
+        const result = await Model.findByIdAndUpdate(
+          id,
+          { $set: data },
+          { new: true }
+        )
+          .populate("resources")
+          .exec();
 
-      return result;
+        return result;
+      } catch (err) {
+        return err;
+      }
+    },
+
+    /**
+     * REMOVE
+     * @param {*} _id
+     * @param {*} params
+     */
+    async remove(_id, params) {
+      try {
+        const { id } = params.route;
+        const result = await Model.deleteOne({ _id: id });
+        return { message: "resource removed!" };
+      } catch (err) {
+        return { message: err };
+      }
     }
   });
   // app.service('/sections/:id/test').hooks(hooks);
@@ -81,17 +104,21 @@ module.exports = function(app) {
      * using the property specified in the URL, push one value from the payload to that array
      */
     async patch(_id, data, params) {
-      const { id } = params.route;
-      const { property } = params.route;
-      const result = await Model.findByIdAndUpdate(
-        id,
-        { $push: { [property]: data.payload } },
-        { new: true }
-      )
-        .populate("resources")
-        .exec();
+      try {
+        const { id } = params.route;
+        const { property } = params.route;
+        const result = await Model.findByIdAndUpdate(
+          id,
+          { $push: { [property]: data.payload } },
+          { new: true }
+        )
+          .populate("resources")
+          .exec();
 
-      return result;
+        return result;
+      } catch (err) {
+        return err;
+      }
     }
   });
 
@@ -107,17 +134,21 @@ module.exports = function(app) {
      * using the property specified in the URL, pull the value specified from that array
      */
     async patch(_id, data, params) {
-      const { id } = params.route;
-      const { property } = params.route;
-      const result = await Model.findByIdAndUpdate(
-        id,
-        { $pull: { [property]: data.payload } },
-        { new: true }
-      )
-        .populate("resources")
-        .exec();
+      try {
+        const { id } = params.route;
+        const { property } = params.route;
+        const result = await Model.findByIdAndUpdate(
+          id,
+          { $pull: { [property]: data.payload } },
+          { new: true }
+        )
+          .populate("resources")
+          .exec();
 
-      return result;
+        return result;
+      } catch (err) {
+        return err;
+      }
     }
   });
 

@@ -22,8 +22,12 @@ module.exports = function(app) {
      * returns an ARRAY of the sections
      */
     async find(params) {
-      const result = await Model.find({});
-      return result;
+      try {
+        const result = await Model.find({});
+        return result;
+      } catch (err) {
+        return err;
+      }
     }
   });
   // app.service('/sections/:id/test').hooks(hooks);
@@ -38,9 +42,13 @@ module.exports = function(app) {
      * finds the data by id and returns it
      */
     async find(params) {
-      const { id } = params.route;
-      const result = await Model.findOne({ _id: id });
-      return result;
+      try {
+        const { id } = params.route;
+        const result = await Model.findOne({ _id: id });
+        return result;
+      } catch (err) {
+        return err;
+      }
     },
     /**
      * PATCH
@@ -50,13 +58,17 @@ module.exports = function(app) {
      * finds the data by id and returns the updated data
      */
     async patch(_id, data, params) {
-      const { id } = params.route;
-      const result = await Model.findByIdAndUpdate(
-        id,
-        { $set: data },
-        { new: true }
-      );
-      return result;
+      try {
+        const { id } = params.route;
+        const result = await Model.findByIdAndUpdate(
+          id,
+          { $set: data },
+          { new: true }
+        );
+        return result;
+      } catch (err) {
+        return err;
+      }
     },
 
     /**
@@ -65,11 +77,15 @@ module.exports = function(app) {
      * @param {*} params
      */
     async remove(_id, params) {
-      const { id } = params.route;
-      const result = await Model.deleteOne({ _id: id });
-      console.log(id, result);
+      try {
+        const { id } = params.route;
+        const result = await Model.deleteOne({ _id: id });
+        console.log(id, result);
 
-      return { message: "resource removed!" };
+        return { message: "resource removed!" };
+      } catch (err) {
+        return err;
+      }
     }
   });
 
@@ -84,8 +100,12 @@ module.exports = function(app) {
      * send in a json object of data and get back the submitted object
      */
     async create(data, params) {
-      const result = await Model.create(data);
-      return result;
+      try {
+        const result = await Model.create(data);
+        return result;
+      } catch (err) {
+        return err;
+      }
     }
   });
   // app.service('/sections/:id/test').hooks(hooks);
