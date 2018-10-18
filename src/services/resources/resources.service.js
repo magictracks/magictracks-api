@@ -13,12 +13,12 @@ module.exports = function(app) {
   };
 
   /**
-   * @@ ROUTE: /resources/all 
+   * @@ ROUTE: /resources/all
    */
   app.use("/resources/all", {
     /**
      * GET
-     * @param {*} params 
+     * @param {*} params
      * returns an ARRAY of the sections
      */
     async find(params) {
@@ -26,7 +26,7 @@ module.exports = function(app) {
       return result;
     }
   });
-  // app.service('/sections/:id/test').hooks(hooks);  
+  // app.service('/sections/:id/test').hooks(hooks);
 
   /**
    * @@ ROUTE: /resources/id/:id
@@ -34,61 +34,61 @@ module.exports = function(app) {
   app.use("/resources/id/:id", {
     /**
      * FIND
-     * @param {*} params 
+     * @param {*} params
      * finds the data by id and returns it
      */
-    async find(params){
+    async find(params) {
       const { id } = params.route;
       const result = await Model.findOne({ _id: id });
       return result;
     },
     /**
      * PATCH
-     * @param {*} _id 
-     * @param {*} data 
-     * @param {*} params 
+     * @param {*} _id
+     * @param {*} data
+     * @param {*} params
      * finds the data by id and returns the updated data
      */
     async patch(_id, data, params) {
       const { id } = params.route;
-      const result = await Model.findByIdAndUpdate(id, {$set:data}, {new:true});
+      const result = await Model.findByIdAndUpdate(
+        id,
+        { $set: data },
+        { new: true }
+      );
       return result;
     },
 
     /**
      * REMOVE
-     * @param {*} _id 
-     * @param {*} params 
+     * @param {*} _id
+     * @param {*} params
      */
-    async remove(_id, params){
-        const {id} = params.route;
-        const result = await Model.deleteOne({_id:id});
-        console.log(id, result)
+    async remove(_id, params) {
+      const { id } = params.route;
+      const result = await Model.deleteOne({ _id: id });
+      console.log(id, result);
 
-        return {message: "resource removed!"}
-      }
-    });
+      return { message: "resource removed!" };
+    }
+  });
 
-   /**
+  /**
    * @@ ROUTE: /resources/add
    */
-   app.use("/resources/add", {
-     /**
-      * CREATE
-      * @param {*} data 
-      * @param {*} params 
-      * send in a json object of data and get back the submitted object
-      */
-      async create(data, params) {
-        const result = await Model.create(data);
-        return result;
-      }
-   });
-   // app.service('/sections/:id/test').hooks(hooks);  
-
-
-
-
+  app.use("/resources/add", {
+    /**
+     * CREATE
+     * @param {*} data
+     * @param {*} params
+     * send in a json object of data and get back the submitted object
+     */
+    async create(data, params) {
+      const result = await Model.create(data);
+      return result;
+    }
+  });
+  // app.service('/sections/:id/test').hooks(hooks);
 
   // Initialize our service with any options it requires
   app.use("/resources", createService(options));
