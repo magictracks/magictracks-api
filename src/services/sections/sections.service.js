@@ -133,6 +133,9 @@ module.exports = function(app) {
      * @param {*} data
      * @param {*} params
      * using the property specified in the URL, pull the value specified from that array
+     * TODO: if you have multiple resources of the same ID in the section, 
+     * you may need to create an endpint specifically to remove by array index rather
+     * than by the id of the resource
      */
     async patch(_id, data, params) {
       try {
