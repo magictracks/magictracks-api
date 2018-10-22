@@ -1,11 +1,11 @@
 // Initializes the `playlists` service on path `/playlists`
-const createService = require("feathers-mongoose");
-const createModel = require("../../models/playlists.model");
-const hooks = require("./playlists.hooks");
+const createService = require('feathers-mongoose');
+const createModel = require('../../models/playlists.model');
+const hooks = require('./playlists.hooks');
 
 module.exports = function(app) {
   const Model = createModel(app);
-  const paginate = app.get("paginate");
+  const paginate = app.get('paginate');
 
   const options = {
     Model,
@@ -15,7 +15,7 @@ module.exports = function(app) {
   /**
    * /playlists/all
    */
-  app.use("/playlists/all", {
+  app.use('/playlists/all', {
     /**
      * FIND()
      * @param {*} params
@@ -24,12 +24,13 @@ module.exports = function(app) {
     async find(params) {
       const result = await Model.find({})
         .populate({
-          path:"sections", 
-          model:"sections",
-          populate:{
-          path: "resources",
-          model: "resources"
-        }})
+          path: 'sections',
+          model: 'sections',
+          populate: {
+            path: 'resources',
+            model: 'resources'
+          }
+        })
         .exec();
       return result;
     }
@@ -39,7 +40,7 @@ module.exports = function(app) {
   /**
    * @@ Route: /playlists/id/:id
    */
-  app.use("/playlists/id/:id", {
+  app.use('/playlists/id/:id', {
     /**
      * FIND()
      * @param {*} params
@@ -48,14 +49,14 @@ module.exports = function(app) {
     async find(params) {
       try {
         const { id } = params.route;
-        console.log(id)
+        console.log(id);
         const result = await Model.findOne({ _id: id })
           .populate({
-            path: "sections",
-            model: "sections",
+            path: 'sections',
+            model: 'sections',
             populate: {
-              path: "resources",
-              model: "resources"
+              path: 'resources',
+              model: 'resources'
             }
           })
           .exec();
@@ -79,11 +80,11 @@ module.exports = function(app) {
           { new: true }
         )
           .populate({
-            path: "sections",
-            model: "sections",
+            path: 'sections',
+            model: 'sections',
             populate: {
-              path: "resources",
-              model: "resources"
+              path: 'resources',
+              model: 'resources'
             }
           })
           .exec();
@@ -104,7 +105,7 @@ module.exports = function(app) {
       try {
         const { id } = params.route;
         const result = await Model.deleteOne({ _id: id });
-        return { message: "playlist removed!" };
+        return { message: 'playlist removed!' };
       } catch (err) {
         return { message: err };
       }
@@ -117,7 +118,7 @@ module.exports = function(app) {
    * :property == resources, tags, users, etc
    * TODO: make sure to sanitize out any Users, etc
    */
-  app.use("/playlists/id/:id/appendOne/:property", {
+  app.use('/playlists/id/:id/appendOne/:property', {
     /**
      * Patch()
      * @param {*} _id
@@ -135,11 +136,11 @@ module.exports = function(app) {
           { new: true }
         )
           .populate({
-            path: "sections",
-            model: "sections",
+            path: 'sections',
+            model: 'sections',
             populate: {
-              path: "resources",
-              model: "resources"
+              path: 'resources',
+              model: 'resources'
             }
           })
           .exec();
@@ -154,7 +155,7 @@ module.exports = function(app) {
   /**
    * @@ ROUTE: /playlists/id/:id/removeOne/:property
    */
-  app.use("/playlists/id/:id/removeOne/:property", {
+  app.use('/playlists/id/:id/removeOne/:property', {
     /**
      * Patch()
      * @param {*} _id
@@ -172,11 +173,11 @@ module.exports = function(app) {
           { new: true }
         )
           .populate({
-            path: "sections",
-            model: "sections",
+            path: 'sections',
+            model: 'sections',
             populate: {
-              path: "resources",
-              model: "resources"
+              path: 'resources',
+              model: 'resources'
             }
           })
           .exec();
@@ -189,10 +190,10 @@ module.exports = function(app) {
   });
 
   // Initialize our service with any options it requires
-  app.use("/playlists", createService(options));
+  app.use('/playlists', createService(options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service("playlists");
+  const service = app.service('playlists');
 
   service.hooks(hooks);
 };

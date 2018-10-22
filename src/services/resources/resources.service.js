@@ -1,11 +1,11 @@
 // Initializes the `resources` service on path `/resources`
-const createService = require("feathers-mongoose");
-const createModel = require("../../models/resources.model");
-const hooks = require("./resources.hooks");
+const createService = require('feathers-mongoose');
+const createModel = require('../../models/resources.model');
+const hooks = require('./resources.hooks');
 
 module.exports = function(app) {
   const Model = createModel(app);
-  const paginate = app.get("paginate");
+  const paginate = app.get('paginate');
 
   const options = {
     Model,
@@ -15,7 +15,7 @@ module.exports = function(app) {
   /**
    * @@ ROUTE: /resources/all
    */
-  app.use("/resources/all", {
+  app.use('/resources/all', {
     /**
      * GET
      * @param {*} params
@@ -35,7 +35,7 @@ module.exports = function(app) {
   /**
    * @@ ROUTE: /resources/id/:id
    */
-  app.use("/resources/id/:id", {
+  app.use('/resources/id/:id', {
     /**
      * FIND
      * @param {*} params
@@ -75,7 +75,7 @@ module.exports = function(app) {
      * REMOVE
      * @param {*} _id
      * @param {*} params
-     * finds the data by id and returns "resource removed" when it has been removed
+     * finds the data by id and returns 'resource removed' when it has been removed
      */
     async remove(_id, params) {
       try {
@@ -83,7 +83,7 @@ module.exports = function(app) {
         const result = await Model.deleteOne({ _id: id });
         console.log(id, result);
 
-        return { message: "resource removed!" };
+        return { message: 'resource removed!' };
       } catch (err) {
         return err;
       }
@@ -93,7 +93,7 @@ module.exports = function(app) {
   /**
    * @@ ROUTE: /resources/add
    */
-  app.use("/resources/add", {
+  app.use('/resources/add', {
     /**
      * CREATE
      * @param {*} data
@@ -112,10 +112,10 @@ module.exports = function(app) {
   // app.service('/sections/:id/test').hooks(hooks);
 
   // Initialize our service with any options it requires
-  app.use("/resources", createService(options));
+  app.use('/resources', createService(options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service("resources");
+  const service = app.service('resources');
 
   service.hooks(hooks);
 };
