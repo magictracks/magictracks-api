@@ -177,11 +177,30 @@ API endpoints for the sections database
 
 - using the property specified in the URL, push one value from the payload to that array
 
+
 ## `/sections/id/:id/removeOne/:property`
 
 ### PATCH: `/sections/id/:id/removeOne/:property`
 
 - using the property specified in the URL, pull the value specified from that array
+
+
+## `/sections/addJSON`
+
+### create: `/sections/addJSON`
+
+- add a json object to the sections DB, and interatively add in the resources that are part of it
+
+
+---
+## Playlists
+
+## `/playlists/addJSON`
+
+### create: `/playlists/addJSON`
+
+- add a json object to the playlist DB, and interatively add in the sections and  resources that are part of it
+
 
 ---
 
