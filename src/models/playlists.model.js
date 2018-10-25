@@ -5,6 +5,8 @@
 module.exports = function(app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+  const sectionSchema = mongooseClient.model('sections').schema;
+  console.log(sectionSchema);
   const playlists = new Schema(
     {
       title: { type: String, required: false },
@@ -14,14 +16,15 @@ module.exports = function(app) {
       keywords: [{ type: String, default: [], required: false }],
       difficulty: [{ type: String, default: [], required: false }],
       imageUrl: { type: String, required: false },
-      sections: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'sections',
-          default: [],
-          required: false
-        }
-      ]
+      sections:{type:[sectionSchema], required:false, default:[]}
+      // sections: [
+      //   {
+      //     type: Schema.Types.ObjectId,
+      //     ref: 'sections',
+      //     default: [],
+      //     required: false
+      //   }
+      // ]
     },
     {
       timestamps: true

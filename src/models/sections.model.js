@@ -5,6 +5,7 @@
 module.exports = function(app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+  const resourceSchema = mongooseClient.model('resources').schema;
   const sections = new Schema(
     {
       title: { type: String, required: false },
@@ -14,9 +15,7 @@ module.exports = function(app) {
       keywords: [{ type: String, default: [], required: false }],
       difficulty: [{ type: String, default: [], required: false }],
       imageUrl: { type: String, required: false },
-      resources: [
-        { type: Schema.Types.ObjectId, ref: 'resources', default: [] }
-      ]
+      resources: {type:[resourceSchema], required:false, default:[]}
     },
     {
       timestamps: true
