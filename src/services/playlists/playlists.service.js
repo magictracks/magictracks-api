@@ -3,7 +3,7 @@ const createService = require('feathers-mongoose');
 const createModel = require('../../models/playlists.model');
 const hooks = require('./playlists.hooks');
 
-module.exports = function(app) {
+module.exports = function (app) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 
@@ -48,9 +48,13 @@ module.exports = function(app) {
      */
     async find(params) {
       try {
-        const { id } = params.route;
+        const {
+          id
+        } = params.route;
         console.log(id);
-        const result = await Model.findOne({ _id: id })
+        const result = await Model.findOne({
+            _id: id
+          })
           .populate({
             path: 'sections',
             model: 'sections',
@@ -73,12 +77,16 @@ module.exports = function(app) {
      */
     async patch(_id, data, params) {
       try {
-        const { id } = params.route;
+        const {
+          id
+        } = params.route;
         const result = await Model.findByIdAndUpdate(
-          id,
-          { $set: data },
-          { new: true }
-        )
+            id, {
+              $set: data
+            }, {
+              new: true
+            }
+          )
           .populate({
             path: 'sections',
             model: 'sections',
@@ -103,11 +111,19 @@ module.exports = function(app) {
      */
     async remove(_id, params) {
       try {
-        const { id } = params.route;
-        const result = await Model.deleteOne({ _id: id });
-        return { message: 'playlist removed!' };
+        const {
+          id
+        } = params.route;
+        const result = await Model.deleteOne({
+          _id: id
+        });
+        return {
+          message: 'playlist removed!'
+        };
       } catch (err) {
-        return { message: err };
+        return {
+          message: err
+        };
       }
     }
   });
@@ -128,13 +144,21 @@ module.exports = function(app) {
      */
     async patch(_id, data, params) {
       try {
-        const { id } = params.route;
-        const { property } = params.route;
+        const {
+          id
+        } = params.route;
+        const {
+          property
+        } = params.route;
         const result = await Model.findByIdAndUpdate(
-          id,
-          { $push: { [property]: data.payload } },
-          { new: true }
-        )
+            id, {
+              $push: {
+                [property]: data.payload
+              }
+            }, {
+              new: true
+            }
+          )
           .populate({
             path: 'sections',
             model: 'sections',
@@ -152,39 +176,71 @@ module.exports = function(app) {
     }
   });
 
-   /**
+  /**
    * @@ ROUTE: /playlists/id/:id/appendOne/:property
    * :property == resources, tags, users, etc
    * TODO: make sure to sanitize out any Users, etc
    */
-  // app.use('/playlists/batch', {
-  //   /**
-  //    * Patch()
-  //    * @param {*} _id
-  //    * @param {*} data
-  //    * @param {*} params
-  //    * using the property specified in the URL, push one value from the payload to that array
-  //    */
-  //   async create( data, params) {
-  //     try {
-  //       // const { property } = params.route;
-  //       // const result = await Model.create(data);
-  //       // data = JSON.parse(data);
-  //       var Parent = Model.model('playlists')
-  //       var parent = new Parent(data);
-  //       data.sections.forEach(section => {
-  //         parent.sections.push(section);
-  //       })
-  //       console.log(parent);
-  //       // parent.save();
+  app.use('/playlists/addJSON', {
+    /**
+     * Patch()
+     * @param {*} _id
+     * @param {*} data
+     * @param {*} params
+     * Get a JSON of a playlist > 
+     * For each section > save all the resources in the db and return their ids > save the section >
+     * Return a list of section ids > store them to the playlist.sections > save the playlist
+     */
+    async create(data, params) {
+      try {
+        const PlaylistModel = Model.model('playlists');
+        const SectionModel = Model.model('sections');
+        const ResourceModel = Model.model('resources');
 
+        let playlist;
+        // create a playlist model which gives us a place to stuff in our ids
+        playlist = new PlaylistModel(data);
 
-  //       return {};
-  //     } catch (err) {
-  //       return err;
-  //     }
-  //   }
-  // });
+        // return an array of section ids after saving them with their respective resources
+        playlist.sections = await Promise.all(data.sections.map(async (section) => {
+          try {
+            // get the section model
+            let sect = new SectionModel(section);
+            // get an array of the ids from the saved resources
+            // save the resource ids into the sections.resources objectId array 
+            sect.resources = await Promise.all(section.resources.map(async (resource) => {
+              try {
+                let rsc = await new ResourceModel(resource).save();
+                return rsc._id;
+              } catch (innerErr2) {
+                return innerErr2;
+              }
+
+            }))
+            // save each section
+            await sect.save();
+            return sect._id;
+          } catch (innerErr1) {
+            return innerErr1;
+          }
+        }));
+
+        // add the section ids to the playlist
+        playlist = await playlist.save();
+        // return the populated item
+        return Model.findById(playlist._id).populate({
+          path: "sections",
+          model: "sections",
+          populate: {
+            path: "resources",
+            model: "resources"
+          }
+        }).exec();
+      } catch (err) {
+        return err;
+      }
+    }
+  });
 
   /**
    * @@ ROUTE: /playlists/id/:id/removeOne/:property
@@ -199,13 +255,21 @@ module.exports = function(app) {
      */
     async patch(_id, data, params) {
       try {
-        const { id } = params.route;
-        const { property } = params.route;
+        const {
+          id
+        } = params.route;
+        const {
+          property
+        } = params.route;
         const result = await Model.findByIdAndUpdate(
-          id,
-          { $pull: { [property]: data.payload } },
-          { new: true }
-        )
+            id, {
+              $pull: {
+                [property]: data.payload
+              }
+            }, {
+              new: true
+            }
+          )
           .populate({
             path: 'sections',
             model: 'sections',
