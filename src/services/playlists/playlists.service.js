@@ -152,6 +152,40 @@ module.exports = function(app) {
     }
   });
 
+   /**
+   * @@ ROUTE: /playlists/id/:id/appendOne/:property
+   * :property == resources, tags, users, etc
+   * TODO: make sure to sanitize out any Users, etc
+   */
+  // app.use('/playlists/batch', {
+  //   /**
+  //    * Patch()
+  //    * @param {*} _id
+  //    * @param {*} data
+  //    * @param {*} params
+  //    * using the property specified in the URL, push one value from the payload to that array
+  //    */
+  //   async create( data, params) {
+  //     try {
+  //       // const { property } = params.route;
+  //       // const result = await Model.create(data);
+  //       // data = JSON.parse(data);
+  //       var Parent = Model.model('playlists')
+  //       var parent = new Parent(data);
+  //       data.sections.forEach(section => {
+  //         parent.sections.push(section);
+  //       })
+  //       console.log(parent);
+  //       // parent.save();
+
+
+  //       return {};
+  //     } catch (err) {
+  //       return err;
+  //     }
+  //   }
+  // });
+
   /**
    * @@ ROUTE: /playlists/id/:id/removeOne/:property
    */

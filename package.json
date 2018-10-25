@@ -28,10 +28,11 @@
     "start": "node src/",
     "clean": "shx rm -rf test/data/",
     "mocha": "npm run clean && NODE_ENV=test mocha test/ --recursive --exit",
-    "resources2db": "node scripts/import2db.js resources",
-    "sections2db": "node scripts/import2db.js sections",
-    "playlists2db": "node scripts/import2db.js playlists",
-    "tags2db": "node scripts/import2db.js tags"
+    "dummyResources2db": "node scripts/importDummy2db.js resources",
+    "dummySections2db": "node scripts/importDummy2db.js sections",
+    "dummyPlaylists2db": "node scripts/importDummy2db.js playlists",
+    "dummyTags2db": "node scripts/importDummy2db.js tags",
+    "realPlaylists2db": "node scripts/importReal2db.js playlists"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.11",
