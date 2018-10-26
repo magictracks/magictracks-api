@@ -5,14 +5,16 @@ const Q = require('q');
 const myResources = JSON.parse(fs.readFileSync('data/resources-exported.json'));
 const mySections = JSON.parse(fs.readFileSync('data/sections-exported.json'));
 const myPlaylists = JSON.parse(fs.readFileSync('data/playlists-exported.json'));
-// const myTags = JSON.parse(fs.readFileSync('data/tags.json'));
+const myTags = JSON.parse(fs.readFileSync('data/tags.json'));
 
 if (process.argv[2] == 'resources') {
-  postMany2Mongo(myResources, 'http://127.0.0.1:3030/resources/');
+  postMany2Mongo(myResources, 'http://127.0.0.1:3030/resources/add');
 } else if (process.argv[2] == 'sections') {
   postMany2Mongo(mySections, 'http://127.0.0.1:3030/sections/addJSON');
 } else if (process.argv[2] == 'playlists') {
   postMany2Mongo(myPlaylists, 'http://127.0.0.1:3030/playlists/addJSON');
+} else if (process.argv[2] == 'tags') {
+  postMany2Mongo(myTags, 'http://127.0.0.1:3030/tags/add');
 }
 
 function postOne2Mongo(payload, _url) {

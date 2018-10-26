@@ -34,7 +34,8 @@
     "dummyTags2db": "node scripts/importDummy2db.js tags",
     "realPlaylists2db": "node scripts/importReal2db.js playlists",
     "realSections2db": "node scripts/importReal2db.js sections",
-    "realResources2db": "node scripts/importReal2db.js resources"
+    "realResources2db": "node scripts/importReal2db.js resources",
+    "realTags2db": "node scripts/importReal2db.js tags"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.11",
