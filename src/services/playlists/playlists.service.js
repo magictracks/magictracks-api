@@ -177,13 +177,13 @@ module.exports = function (app) {
   });
 
   /**
-   * @@ ROUTE: /playlists/id/:id/appendOne/:property
+   * @@ ROUTE: /playlists/addJSON
    * :property == resources, tags, users, etc
    * TODO: make sure to sanitize out any Users, etc
    */
   app.use('/playlists/addJSON', {
     /**
-     * Patch()
+     * create()
      * @param {*} _id
      * @param {*} data
      * @param {*} params
