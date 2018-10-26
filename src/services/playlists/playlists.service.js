@@ -18,9 +18,10 @@ module.exports = function (app) {
       /**  
        * /playlists
        */
-      this.all = {
+      this.general = {
         async find(params) {
-          const result = await Model.find({})
+          try{
+            const result = await Model.find({})
             .populate({
               path: 'sections',
               model: 'sections',
@@ -30,9 +31,29 @@ module.exports = function (app) {
               }
             })
             .exec();
-          return result;
-        }
-      }
+            return result;
+          }catch(err){
+            return err;
+          }
+        }, // end find
+
+        /**
+         * 
+         * @param {*} data 
+         * @param {*} params 
+         */
+        async create(data, params){
+          try{
+            const result = await Model.create(data);
+            return result;
+          }catch(err){
+            return err;
+          } 
+        } // end create
+
+      } // end .playlist
+
+      
 
       /** 
        * /playlists/id/:id
@@ -211,7 +232,7 @@ module.exports = function (app) {
 
 
   controllers = new Controllers();
-  app.use('/playlists', controllers.all);
+  app.use('/playlists', controllers.general);
   app.use('/playlists/id/:id', controllers.byId);
   app.use('/playlists/addJSON', controllers.addJSON);
   
