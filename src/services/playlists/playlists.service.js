@@ -255,12 +255,8 @@ module.exports = function (app) {
      */
     async patch(_id, data, params) {
       try {
-        const {
-          id
-        } = params.route;
-        const {
-          property
-        } = params.route;
+        const {id} = params.route;
+        const {property} = params.route;
         const result = await Model.findByIdAndUpdate(
             id, {
               $pull: {
