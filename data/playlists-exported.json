@@ -1,0 +1,76 @@
+[{
+  "title": "Introduction to HTML and CSS with P5.js",
+  "url": "",
+  "sections": [{
+    "title": "Coding Train Intro to HTML with P5.js",
+    "description": "follow @Shiffman as he introduces HTML through p5.js",
+    "resources": [{
+        "title": "What is HTML? - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=URSH0QpxKo8&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=1"
+      },
+      {
+        "title": "Creating HTML Elements with JavaScript - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=lAtoaRz78I4&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=2"
+      },
+      {
+        "title": "Manipulating DOM Elements with html() and position() - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=YfaJ20vXcK8&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=3"
+      },
+      {
+        "title": "Handling DOM Events with Callbacks - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=NcCEzzd9BGE&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=4"
+      },
+      {
+        "title": "Interacting with the DOM using Sliders, Buttons and Text Inputs - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=587qclhguQg&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=5"
+      },
+      {
+        "title": "Other Events and Inputs - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=HsDVz2_Qgow&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=6"
+      },
+      {
+        "title": "Events 'changed' and 'input' - p5.js Tutorial",
+        "url": "https://www.youtube.com/watch?v=ZEy0_NLhdSE&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=8"
+      }
+    ]
+  }, {
+    "title": "Coding Train Intro to CSS with P5.js",
+    "description": "Follow Dan as he introduces CSS through P5.js",
+    "resources": [{
+        "title": "The Basics of CSS - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=zGL8q8iQSQw&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=7"
+      },
+      {
+        "title": "CSS Selectors - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=sVo8Dbii8OQ&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=9"
+      },
+      {
+        "title": "select() and selectAll() with CSS Selectors - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=sSQPLIHIzmg&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=10"
+      },
+      {
+        "title": "Callbacks on Multiple DOM Elements - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=KeZBpeH59Q4&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=11"
+      },
+      {
+        "title": "parent() and child() - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=eoXLD0Aw1YI&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=12"
+      },
+      {
+        "title": "Assigning a CSS Class Dynamically - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=KMRgLi2TBhQ&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=13"
+      },
+      {
+        "title": "parent() and child() again with Variables - p5.js Tutorial",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=4OAG_BkQcPE&list=PLRqwX-V7Uu6bI1SlcCRfLH79HZrFAtBvX&index=14"
+      }
+    ]
+  }]
+}]
