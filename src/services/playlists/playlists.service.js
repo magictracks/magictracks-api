@@ -13,7 +13,7 @@ module.exports = function (app) {
   };
 
 
-  class Controllers {
+  class Handlers {
     constructor() {
       /**  
        * /playlists
@@ -231,10 +231,10 @@ module.exports = function (app) {
   }; // end controllers
 
 
-  controllers = new Controllers();
-  app.use('/playlists', controllers.general);
-  app.use('/playlists/id/:id', controllers.byId);
-  app.use('/playlists/addJSON', controllers.addJSON);
+  handlers = new Handlers();
+  app.use('/playlists', handlers.general);
+  app.use('/playlists/id/:id', handlers.byId);
+  app.use('/playlists/addJSON', handlers.addJSON);
   
 
   // Initialize our service with any options it requires
