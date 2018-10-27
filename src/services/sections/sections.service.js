@@ -40,20 +40,20 @@ module.exports = function (app) {
          * @param {*} data 
          * @param {*} params 
          */
-        async create(data, params){
-          try{
+        async create(data, params) {
+          try {
             const result = await Model.create(data);
             return result;
-          }catch(err){
+          } catch (err) {
             return err;
-          } 
+          }
         } // end create
       };
 
       /** 
        * /sections/id/:id
        */
-      this.byid = {
+      this.byId = {
         // do stuff
         /**
          * FIND()
