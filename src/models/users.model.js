@@ -7,6 +7,8 @@ module.exports = function(app) {
   const users = new mongooseClient.Schema(
     {
       email: { type: String, unique: true, lowercase: true },
+      username:{type: String, unique:true, lowercase:true},
+      description:{type: String},
       password: { type: String }
     },
     {
