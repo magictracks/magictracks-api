@@ -193,6 +193,7 @@ module.exports = function (app) {
                 let sect = new SectionModel(section);
                 // get an array of the ids from the saved resources
                 // save the resource ids into the sections.resources objectId array 
+                // TODO: Add saving for tags and other features requiring populating
                 sect.resources = await Promise.all(section.resources.map(async (resource) => {
                   try {
                     let rsc = await new ResourceModel(resource).save();
