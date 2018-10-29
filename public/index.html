@@ -8,275 +8,34 @@
   </head>
   <body>
     <main class="container">
-        <section class="columns col-12 one-line">
-          <nav class="column col-4">
-            <div class="columns one-line col-12">
-              <div class="col-3">
-                <img src="https://raw.githubusercontent.com/knittingmachine/knittingmachine-docs/master/assets/images/scarf-with-eyes.png" alt="scarf with eyes" class="logo">
+        <!-- register -->
+        <section id="auth" class="columns col-8  col-mx-auto p-2">
+          <h2>Test the registration and login</h2>
+          <!-- register -->
+          <section id="register-section" class="column col-12 form-area p-2">
+            <h3>Create Account</h3>
+            <div class="form-group">
+                <label class="form-label" for="register-email">Email</label>
+                <input class="form-input" type="text" id="register-email" placeholder="test1@test.com">
+                <label class="form-label" for="register-password">Password</label>
+                <input class="form-input" type="password" id="register-password" placeholder="test1"> <br>
+                <input class="btn btn-sucess" type="submit" id="register-submit" value="Register!">
               </div>
-              <div class="col-9">
-                <h1>Knitting Machine API</h1>
+          </section>
+          <!-- login -->
+          <section id="login-section" class="column col-12 form-area p-2">
+            <h3>Login</h3>
+            <div class="form-group">
+                <label class="form-label" for="login-email">Email</label>
+                <input class="form-input" type="text" id="login-email" placeholder="test1@test.com">
+                <label class="form-label" for="login-password">Password</label>
+                <input class="form-input" type="password" id="login-password" placeholder="test1"><br>
+                <input class="btn btn-sucess" type="submit" id="login-submit" value="Login!">
               </div>
-            </div>
+          </section>
+        </section>
 
-            <ul>
-              <li>Resources
-                <ul>
-                  <li>
-                    GET
-                    <ul>
-                      <li><a href="#resources-findOne-example">findAll()</a> </li>
-                      <li> <a href="#resources-findById-example">findById()</a> </li>
-                    </ul>
-                  </li>
-                  <li>
-                    CREATE
-                    <ul>
-                      <li> <a href="#resources-create-example">create()</a> </li>
-                      <li> <a href="#resources-create-form-example">create() with form</a> </li>
-                    </ul>
-                  </li>
-                  <li>
-                    DELETE
-                    <ul>
-                      <li> <a href="#resources-deleteById-example">deleteById()</a> </li>
-                    </ul>
-                  </li>
-                  <li>
-                    PATCH
-                    <ul>
-                      <li> <a href="#resources-patch-example">patch()</a> </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>Sections
-                <ul>
-                  <li>
-                    GET
-                    <ul>
-                      <li> <a href="#sections-findOne-example">findAll()</a> </li>
-                      <li> <a href="#sections-findById-example">findById()</a> </li>
-                    </ul>
-                  </li>
-                  <li>
-                    CREATE
-                    <ul>
-                      <li> <a href="#sections-create-example">create()</a> </li>
-                      <li> <a href="#sections-create-form-example">create() with form</a> </li>
-                    </ul>
-                  </li>
-                  <li>
-                    DELETE
-                    <ul>
-                      <li> <a href="#sections-deleteById-example">deleteById()</a> </li>
-                    </ul>
-                  </li>
-                  <li>
-                    PATCH
-                    <ul>
-                      <li> <a href="#">patch()</a> </li>
-                      <li> <a href="#">addResourceById()</a> </li>
-                      <li> <a href="#">removeResourceById()</a> </li>
-                      <li> <a href="#">batchAddResources()</a> </li>
-                    </ul>
-                  </li>
-
-                </ul>
-              </li>
-              <li>Playlists
-                <ul>
-                  <li> <a href="#playlists-findOne-example">findAll()</a> </li>
-                  <li> <a href="#playlists-findById-example">findById()</a> </li>
-                  <li> <a href="#playlists-create-example">create()</a> </li>
-                  <li> <a href="#playlists-create-form-example">create() with form</a> </li>
-                  <li> <a href="#playlists-deleteById-example">deleteById()</a> </li>
-                  <li> <a href="#">patch()</a> </li>
-                  <li> <a href="#">addResourceById()</a> </li>
-                  <li> <a href="#">removeResourceById()</a> </li>
-                  <li> <a href="#">batchAddResources()</a> </li>
-                  <li> <a href="#">addSectionById()</a> </li>
-                  <li> <a href="#">removeSectionById()</a> </li>
-                  <li> <a href="#">batchAddSections()</a> </li>
-                </ul>
-              </li>
-              <li>Tags
-                <ul>
-                  <li>TBD</li>
-                </ul>
-              </li>
-              <li>Users
-                <ul>
-                  <li>TBD</li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-
-          <section id="api-examples" class="column col-8">
-            <!-- FIND ONE EXAMPLE -->
-            <article class="example columns col-12 resources-example" id="resources-findOne-example">
-                <h3>/resources: findAll()</h3>
-                <div class="divider"></div>
-                <div class="columns one-line col-12">
-                  <div class="column col-6">
-                    <div class="description">
-                        <p>find all the resources and send back an array</p>
-                    </div>
-                    <div class="url-endpoint">
-                        <p class="url-endpoint-title">URL example:</p>
-                        <p><code>http://localhost:3030/resources</code></p>
-                    </div>
-                    <button class="btn" id="resources-findAll">SUBMIT</button>
-                  </div>
-                  <div class="column col-6">
-                    <pre>
-                      <code id="resources-findAll-result"></code>
-                    </pre>
-                  </div>
-                </div>
-            </article>
-
-            <!-- FIND ONE BY ID -->
-            <article class="example columns col-12 resources-example" id="resources-findById-example">
-                <h3>/resources: findById()</h3>
-                <div class="divider"></div>
-                <div class="columns one-line col-12">
-                  <div class="column col-6">
-                    <div class="description">
-                        <p>find one resource by it's ID and send back an JSON object</p>
-                    </div>
-                    <div class="url-endpoint">
-                        <p class="url-endpoint-title">URL example:</p>
-                        <pre><code>http://localhost:3030/resources?_id=5bc507165686ad95c5929953</code></pre>
-                    </div>
-                    <button class="btn" id="resources-findById">SUBMIT</button>
-                  </div>
-                  <div class="column col-6">
-                    <pre>
-                      <code id="resources-findById-result"></code>
-                    </pre>
-                  </div>
-                </div>
-            </article>
-
-            <!-- POST RANDOM -->
-            <article class="example columns col-12 resources-example" id="resources-create-example">
-                <h3>/resources: create()</h3>
-                <div class="divider"></div>
-                <div class="columns one-line col-12">
-                  <div class="column col-6">
-                    <div class="description">
-                        <p>create a new resource and send back the new JSON object</p>
-                    </div>
-                    <div class="url-endpoint">
-                        <p class="url-endpoint-title">data being sent:</p>
-                        <pre><code>
-                      {
-                        title:"Test from API, Random Number: " + Math.random()*100,
-                        description: "Test from API, Random Number: " + Math.random()*100,
-                        url:"DELETEME",
-                        keywords: ["TEST", "TEST"],
-                        difficulty:["BEGINNER"],
-                        imageUrl:"https://raw.githubusercontent.com/knittingmachine/knittingmachine-docs/master/docs/concept/illustrations/img/frustrated-student.png"
-                      }
-                      </code></pre>
-                    </div>
-                    <button class="btn" id="resources-create">SUBMIT</button>
-                  </div>
-                  <div class="column col-6">
-                    <pre>
-                      <code id="resources-create-result"></code>
-                    </pre>
-                  </div>
-                </div>
-            </article>
-
-
-            <!-- POST -->
-            <article class="example columns col-12 resources-example" id="resources-create-example-form">
-                <h3>/resources: create() with form</h3>
-                <div class="divider"></div>
-                <div class="columns one-line col-12">
-                  <div class="column col-6">
-                    <div class="description">
-                        <p>create a new resource with form inputs and send back the new JSON object</p>
-                    </div>
-                    <div class="url-endpoint">
-                        <form id="resources-create-form" method="post">
-                          <input type="text" name="title" value="" placeholder="title">
-                          <input type="text" name="description" value="" placeholder="description">
-                          <input type="text" name="url" value="" placeholder="url">
-                          <input type="text" name="imageUrl" value="" placeholder="imageUrl">
-                          <fieldset>
-                            <legend>Difficulty</legend>
-                            <label for="create-beginner">beginner</label>
-                            <input id="create-beginner" type="radio" name="difficulty" value="beginner">
-                            <label for="create-intermediate">intermediate</label>
-                            <input id="create-intermediate" type="radio" name="difficulty" value="intermediate">
-                            <label for="create-advanced">advanced</label>
-                            <input id="create-advanced" type="radio" name="difficulty" value="advanced">
-                          </fieldset>
-                          <input class="btn" type="submit" name="submit" value="SUBMIT">
-                        </form>
-                    </div>
-                  </div>
-                  <div class="column col-6">
-                    <pre>
-                      <code id="resources-create-form-result"></code>
-                    </pre>
-                  </div>
-                </div>
-            </article>
-
-            <!-- delete by id -->
-            <article class="example columns col-12 resources-example" id="resources-deleteById-example">
-                <h3>/resources: deleteById()</h3>
-                <div class="divider"></div>
-                <div class="columns one-line col-12">
-                  <div class="column col-6">
-                    <div class="description">
-                        <p>delete a resource by a specified id if it exists</p>
-                    </div>
-                    <div class="url-endpoint">
-                        <p class="url-endpoint-title">URL example:</p>
-                        <p><code>http://localhost:3030/resources?_id=5bc74501ac401e06a53fe5c7</code></p>
-                    </div>
-                    <button class="btn" id="resources-deleteById">SUBMIT</button>
-                  </div>
-                  <div class="column col-6">
-                    <pre>
-                      <code id="resources-deleteById-result"></code>
-                    </pre>
-                  </div>
-                </div>
-            </article>
-
-            <article class="example columns col-12 resources-example" id="resources-patch-example">
-                <h3>/resources: patch()</h3>
-                <div class="divider"></div>
-                <div class="columns one-line col-12">
-                  <div class="column col-6">
-                    <div class="description">
-                        <p>patch - update and existing property - of a resource and leave the other properties alone</p>
-                    </div>
-                    <div class="url-endpoint">
-                        <p class="url-endpoint-title">patch the title property of a resource:</p>
-                        <p><code>{title:"woo hoo! super mega bueno"}</code></p>
-                    </div>
-                    <button class="btn" id="resources-patch">SUBMIT</button>
-                  </div>
-                  <div class="column col-6">
-                    <pre>
-                      <code id="resources-patch-result"></code>
-                    </pre>
-                  </div>
-                </div>
-            </article>
-
-          </section> <!--  End section -->
-
-
+        
     </main>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>

@@ -23,18 +23,19 @@ module.exports = function (app) {
     tags: [{
       type: Schema.Types.ObjectId,
       default: [],
-      required: false
+      required: false,
+      ref:'tags'
     }],
     keywords: [{
       type: String,
       default: [],
       required: false
     }],
-    submittedBy: [{
+    submittedBy: {
       type: Schema.Types.ObjectId,
-      default: [],
-      required: false
-    }],
+      required: false,
+      ref:'users'
+    },
     submissionCount: {
       type: Number,
       required: false

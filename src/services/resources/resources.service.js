@@ -37,6 +37,8 @@ module.exports = function (app) {
          */
         async create(data, params) {
           try {
+            // add in the user to the submittedBy property
+            data = Object.assign({submittedBy: params.user._id}, data)
             const result = await Model.create(data);
             return result;
           } catch (err) {
@@ -58,9 +60,13 @@ module.exports = function (app) {
             const {
               id
             } = params.route;
+            // const result = await Model.findOne({
+            //   _id: id
+            // }).populate({ path: 'submittedBy', select: 'username' }).exec();
             const result = await Model.findOne({
               _id: id
-            });
+            }).populate({ path: 'submittedBy'}).exec();
+
             return result;
           } catch (err) {
             return err;
@@ -126,9 +132,12 @@ module.exports = function (app) {
   }
   const handlers = new Handlers();
 
+  // our routes
   app.use('/resources', handlers.general);
-  app.use('/resources/id/:id', handlers.general);
-  // app.service('/sections/:id/test').hooks(hooks);
+  app.use('/resources/id/:id', handlers.byId);
+  // add in our service hooks
+  app.service('/resources').hooks(hooks);
+  app.service('/resources/id/:id').hooks(hooks);
 
   // Initialize our service with any options it requires
   app.use('/resources', createService(options));
