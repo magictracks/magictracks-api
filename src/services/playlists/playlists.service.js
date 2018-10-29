@@ -44,6 +44,7 @@ module.exports = function (app) {
          */
         async create(data, params){
           try{
+            data = Object.assign({submittedBy: params.user._id}, data)
             const result = await Model.create(data);
             return result;
           }catch(err){
@@ -126,7 +127,7 @@ module.exports = function (app) {
 
           
             const result = await Model.findOneAndUpdate(
-                id, updateProps, {
+                {_id:id}, updateProps, {
                   new: true
                 }
               )

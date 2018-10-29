@@ -1,22 +1,21 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const populate = require('../../hooks/populate');
-const batchListUpdate = require('../../hooks/batch-list-update');
+// const populate = require('../../hooks/populate');
+// const batchListUpdate = require('../../hooks/batch-list-update');
+const sanitizeUser = require('../../hooks/sanitizeUser');
 
-// authenticate('jwt')
-// batchListUpdate()
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [authenticate('jwt')],
+    update: [authenticate('jwt')],
+    patch: [authenticate('jwt')],
+    remove: [authenticate('jwt')]
   },
 
   after: {
-    all: [],
+    all: [sanitizeUser()],
     find: [],
     get: [],
     create: [],

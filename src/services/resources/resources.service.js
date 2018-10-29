@@ -85,7 +85,7 @@ module.exports = function (app) {
               id
             } = params.route;
             const result = await Model.findByIdAndUpdate(
-              id, {
+              {_id:id}, {
                 $set: data
               }, {
                 new: true

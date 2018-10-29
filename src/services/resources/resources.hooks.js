@@ -1,5 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const processResource = require('../../hooks/process-resource');
+const sanitizeUser = require('../../hooks/sanitizeUser');
 
 // authenticate('jwt')
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   after: {
-    all: [processResource()],
+    all: [sanitizeUser()],
     find: [],
     get: [],
     create: [],

@@ -28,6 +28,7 @@ module.exports = function (app) {
           try {
             const result = await Model.find({})
               .populate('resources')
+              .populate('submittedBy')
               .exec();
             return result;
           } catch (err) {
@@ -42,6 +43,7 @@ module.exports = function (app) {
          */
         async create(data, params) {
           try {
+            data = Object.assign({submittedBy: params.user._id}, data)
             const result = await Model.create(data);
             return result;
           } catch (err) {
@@ -69,6 +71,7 @@ module.exports = function (app) {
                 _id: id
               })
               .populate('resources')
+              .populate('submittedBy')
               .exec();
             return result;
           } catch (err) {
@@ -79,21 +82,47 @@ module.exports = function (app) {
          * PATCH()
          * @param {*} params
          * returns a json of the updated values.
-         * NOTE: if you want to $push or remove values from an array, see /sections/<action>/:property/id/:id
+         * * [
+         *     {"op":"set", "path":"title", "value":"Learning with Dan is my Favorite Thing"}, 
+         *     {"op":"set", "path":"description",  "value":"don't you want to learn with Dan?"}, 
+         *     {"op":"push", "path":"sections", "value":"5bd366ac399838e5d063aa2c"}
+         * ]
          */
         async patch(_id, data, params) {
           try {
             const {
               id
             } = params.route;
-            const result = await Model.findByIdAndUpdate(
-                id, {
-                  $set: data
-                }, {
+            let updateProps = {
+              "$set": {},
+              "$push": {},
+              "$pull": {}
+            }
+
+
+            data.forEach( item => {
+              if(item.op === "set"){
+                updateProps["$set"] = Object.assign({[item.path]: item.value },  updateProps["$set"]);
+              } else if (item.op === "push"){
+                updateProps["$push"] = Object.assign({[item.path]: item.value },  updateProps["$push"]);
+              } else if (item.op === "pull"){
+                updateProps["$pull"] = Object.assign({[item.path]: item.value },  updateProps["$pull"]);
+              }
+            });
+
+            Object.keys(updateProps).forEach( (key) => {
+              if( Object.keys(updateProps[key]).length < 1 ){
+                delete updateProps[key]
+              }
+            });
+          
+            const result = await Model.findOneAndUpdate(
+                {_id:id}, updateProps, {
                   new: true
                 }
               )
               .populate('resources')
+              .populate('submittedBy')
               .exec();
 
             return result;
@@ -183,7 +212,10 @@ module.exports = function (app) {
   app.use('/sections', handlers.general);
   app.use('/sections/id/:id', handlers.byId);
   app.use('/sections/addJSON', handlers.addJSON);
-  // app.service('/sections/:id/test').hooks(hooks);
+  // add hooks
+  app.service('/sections').hooks(hooks);
+  app.service('/sections/id/:id').hooks(hooks);
+  app.service('/sections/addJSON').hooks(hooks);
 
   // Initialize our service with any options it requires
   app.use('/sections', createService(options));
