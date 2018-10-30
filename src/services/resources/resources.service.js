@@ -38,7 +38,10 @@ module.exports = function (app) {
         async create(data, params) {
           try {
             // add in the user to the submittedBy property
-            data = Object.assign({submittedBy: params.user._id}, data)
+            // add in the creator to the collaborators array
+            data = Object.assign({
+              submittedBy: params.user._id
+            }, data)
             const result = await Model.create(data);
             return result;
           } catch (err) {
@@ -65,7 +68,9 @@ module.exports = function (app) {
             // }).populate({ path: 'submittedBy', select: 'username' }).exec();
             const result = await Model.findOne({
               _id: id
-            }).populate({ path: 'submittedBy'}).exec();
+            }).populate({
+              path: 'submittedBy'
+            }).exec();
 
             return result;
           } catch (err) {
@@ -84,13 +89,16 @@ module.exports = function (app) {
             const {
               id
             } = params.route;
-            const result = await Model.findByIdAndUpdate(
-              {_id:id}, {
-                $set: data
-              }, {
-                new: true
-              }
-            );
+            const result = await Model.findByIdAndUpdate({
+              _id: id
+            }, {
+              $set: data
+            }, {
+              new: true
+            }).populate({
+              path: 'submittedBy'
+            }).exec();
+
             return result;
           } catch (err) {
             return err;
