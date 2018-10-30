@@ -38,8 +38,6 @@
     "realTags2db": "node scripts/importReal2db.js tags"
   },
   "dependencies": {
-    "@casl/ability": "^2.5.0",
-    "@casl/mongoose": "^2.2.1",
     "@feathersjs/authentication": "^2.1.11",
     "@feathersjs/authentication-jwt": "^2.0.5",
     "@feathersjs/authentication-local": "^1.2.5",
@@ -48,7 +46,6 @@
     "@feathersjs/express": "^1.2.7",
     "@feathersjs/feathers": "^3.2.3",
     "@feathersjs/socketio": "^3.2.2",
-    "casl": "^1.1.0",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "feathers-hooks-common": "^4.17.12",
