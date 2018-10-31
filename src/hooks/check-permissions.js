@@ -20,6 +20,7 @@ module.exports = function (options = {}) {
     // get the resource from the DB;
     let resource = await app.service('resources').get(params.route.id)
     // check who the collaborators are
+    // TODO: maybe it is better to do collaborators using usernames rather than IDs?
     let isCollaborator = resource.collaborators.some( (collaborator) => collaborator.toString() == userId.toString());
 
     // if it is either owned by the current user or the user is a collaborator, allow the actions
