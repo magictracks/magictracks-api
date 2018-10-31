@@ -31,6 +31,12 @@ module.exports = function (app) {
       required: false,
       ref:'users'
     },
+    collaborators: [{
+      type: Schema.Types.ObjectId,
+      required: false,
+      ref: 'users',
+      default:[]
+    }],
     keywords: [{
       type: String,
       default: [],

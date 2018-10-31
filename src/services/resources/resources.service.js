@@ -40,7 +40,8 @@ module.exports = function (app) {
             // add in the user to the submittedBy property
             // add in the creator to the collaborators array
             data = Object.assign({
-              submittedBy: params.user._id
+              submittedBy: params.user._id,
+              collaborators: [params.user._id],
             }, data)
             const result = await Model.create(data);
             return result;
@@ -83,21 +84,48 @@ module.exports = function (app) {
          * @param {*} data
          * @param {*} params
          * finds the data by id and returns the updated data
+         * * * [
+         *     {"op":"set", "path":"title", "value":"Learning with Dan is my Favorite Thing"}, 
+         *     {"op":"set", "path":"description",  "value":"don't you want to learn with Dan?"}, 
+         *     {"op":"push", "path":"sections", "value":"5bd366ac399838e5d063aa2c"}
+         * ]
          */
         async patch(_id, data, params) {
           try {
             const {
               id
             } = params.route;
-            const result = await Model.findByIdAndUpdate({
-              _id: id
-            }, {
-              $set: data
-            }, {
-              new: true
-            }).populate({
-              path: 'submittedBy'
-            }).exec();
+            let updateProps = {
+              "$set": {},
+              "$push": {},
+              "$pull": {}
+            }
+
+
+            data.forEach( item => {
+              if(item.op === "set"){
+                updateProps["$set"] = Object.assign({[item.path]: item.value },  updateProps["$set"]);
+              } else if (item.op === "push"){
+                updateProps["$push"] = Object.assign({[item.path]: item.value },  updateProps["$push"]);
+              } else if (item.op === "pull"){
+                updateProps["$pull"] = Object.assign({[item.path]: item.value },  updateProps["$pull"]);
+              }
+            });
+
+            Object.keys(updateProps).forEach( (key) => {
+              if( Object.keys(updateProps[key]).length < 1 ){
+                delete updateProps[key]
+              }
+            });
+          
+            const result = await Model.findOneAndUpdate(
+                {_id:id}, updateProps, {
+                  new: true
+                }
+              )
+              .populate('collaborators')
+              .populate('submittedBy')
+              .exec();
 
             return result;
           } catch (err) {

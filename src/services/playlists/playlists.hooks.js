@@ -18,7 +18,7 @@ module.exports = {
   },
 
   after: {
-    all: [sanitizeUser()],
+    all: [],
     find: [],
     get: [],
     create: [],

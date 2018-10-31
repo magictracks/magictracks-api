@@ -20,16 +20,22 @@ module.exports = function (app) {
       type: String,
       required: false
     },
-    submittedBy:{
+    submittedBy: {
       type: Schema.Types.ObjectId,
       required: false,
-      ref:'users'
+      ref: 'users'
     },
+    collaborators: [{
+      type: Schema.Types.ObjectId,
+      required: false,
+      ref: 'users',
+      default:[]
+    }],
     tags: [{
       type: Schema.Types.ObjectId,
       default: [],
       required: false,
-      ref:'tags'
+      ref: 'tags'
     }],
     keywords: [{
       type: String,
