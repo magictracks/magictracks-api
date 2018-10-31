@@ -14,21 +14,22 @@ module.exports = function (options = {}) {
     } = context;
 
     const isExternal = !!params.provider;
+    const userId = params.user._id;
 
-    console.log("🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈")
 
+    // get the resource from the DB;
     let resource = await app.service('resources').get(params.route.id)
-    resource.collaborators = resource.collaborators.map(item => item.toString());
+    // check who the collaborators are
+    let isCollaborator = resource.collaborators.some( (collaborator) => collaborator.toString() == userId.toString());
 
-    if(params.user._id == resource.submittedBy || resource.collaborators.includes(params.user._id.toString()) == true ){
+    // if it is either owned by the current user or the user is a collaborator, allow the actions
+    // otherwise throw an error
+    if(userId == resource.submittedBy || isCollaborator == true){
       return context;
     } else{
       throw new Forbidden('You are not allowed to access this');
     }
-  
-    console.log("🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈")
 
-    
     // console.log(params.user.permissions)
     // if (isExternal && !context.params.user.permissions.includes('messages::create')) {
     //   throw new Forbidden('You are not allowed to access this');
