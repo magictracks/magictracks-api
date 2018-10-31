@@ -4,6 +4,7 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
+  var mongooseVersion = require('mongoose-version');
   const {
     Schema
   } = mongooseClient;
@@ -60,6 +61,13 @@ module.exports = function (app) {
   }, {
     timestamps: true
   });
+
+  playlists.plugin(mongooseVersion, {
+    collection: "playlists_versions",
+    strategy: 'array',
+    maxVersions: 25
+  });
+
 
   return mongooseClient.model('playlists', playlists);
 };

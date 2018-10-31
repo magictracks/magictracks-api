@@ -4,6 +4,7 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
+  var mongooseVersion = require('mongoose-version');
   const {
     Schema
   } = mongooseClient;
@@ -24,7 +25,7 @@ module.exports = function (app) {
       type: Schema.Types.ObjectId,
       default: [],
       required: false,
-      ref:'tags'
+      ref: 'tags'
     }],
     keywords: [{
       type: String,
@@ -34,13 +35,13 @@ module.exports = function (app) {
     submittedBy: {
       type: Schema.Types.ObjectId,
       required: false,
-      ref:'users'
+      ref: 'users'
     },
     collaborators: [{
       type: Schema.Types.ObjectId,
       required: false,
       ref: 'users',
-      default:[]
+      default: []
     }],
     submissionCount: {
       type: Number,
@@ -57,6 +58,12 @@ module.exports = function (app) {
     }
   }, {
     timestamps: true
+  });
+
+  resources.plugin(mongooseVersion, {
+    collection: "resources_versions",
+    strategy: 'array',
+    maxVersions: 25
   });
 
   return mongooseClient.model('resources', resources);
