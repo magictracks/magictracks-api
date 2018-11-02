@@ -6,7 +6,12 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const comments = new Schema({
-    text: { type: String, required: true }
+    text: { type: String, required: true },
+    editable:{
+      type: Boolean,
+      required: false,
+      default: true
+    }
   }, {
     timestamps: true
   });

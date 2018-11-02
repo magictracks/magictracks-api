@@ -55,6 +55,11 @@ module.exports = function (app) {
     imageUrl: {
       type: String,
       required: false
+    },
+    editable:{
+      type: Boolean,
+      required: false,
+      default: true
     }
   }, {
     timestamps: true

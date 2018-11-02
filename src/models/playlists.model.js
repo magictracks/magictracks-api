@@ -57,7 +57,12 @@ module.exports = function (app) {
       ref: 'sections',
       default: [],
       required: false
-    }]
+    }],
+    editable:{
+      type: Boolean,
+      required: false,
+      default: true
+    }
   }, {
     timestamps: true
   });
