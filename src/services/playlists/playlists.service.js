@@ -185,18 +185,33 @@ module.exports = function (app) {
 
             let playlist;
             // create a playlist model which gives us a place to stuff in our ids
+            
+            data = Object.assign({
+              submittedBy: params.user._id,
+              collaborators: [params.user._id],
+            }, data)
+
             playlist = new PlaylistModel(data);
 
             // return an array of section ids after saving them with their respective resources
             playlist.sections = await Promise.all(data.sections.map(async (section) => {
               try {
                 // get the section model
+                section = Object.assign({
+                  submittedBy: params.user._id,
+                  collaborators: [params.user._id],
+                }, section)
+
                 let sect = new SectionModel(section);
                 // get an array of the ids from the saved resources
                 // save the resource ids into the sections.resources objectId array 
                 // TODO: Add saving for tags and other features requiring populating
                 sect.resources = await Promise.all(section.resources.map(async (resource) => {
                   try {
+                    resource = Object.assign({
+                      submittedBy: params.user._id,
+                      collaborators: [params.user._id],
+                    }, resource)
                     let rsc = await new ResourceModel(resource).save();
                     return rsc._id;
                   } catch (innerErr2) {
@@ -238,6 +253,10 @@ module.exports = function (app) {
   app.use('/playlists/id/:id', handlers.byId);
   app.use('/playlists/addJSON', handlers.addJSON);
   
+  // hooks
+  app.service('/playlists').hooks(hooks);
+  app.service('/playlists/id/:id').hooks(hooks);
+  app.service('/playlists/addJSON').hooks(hooks);
 
   // Initialize our service with any options it requires
   app.use('/playlists', createService(options));

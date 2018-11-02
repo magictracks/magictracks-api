@@ -176,6 +176,10 @@ module.exports = function (app) {
             const ResourceModel = Model.model('resources');
 
             let section;
+            data = Object.assign({
+              submittedBy: params.user._id,
+              collaborators: [params.user._id],
+            }, data)
             // create a playlist model which gives us a place to stuff in our ids
             section = new SectionModel(data);
 
@@ -183,6 +187,10 @@ module.exports = function (app) {
             // save the resource ids into the data.resources objectId array 
             section.resources = await Promise.all(data.resources.map(async (resource) => {
               try {
+                resource = Object.assign({
+                  submittedBy: params.user._id,
+                  collaborators: [params.user._id],
+                }, resource)
                 let rsc = await new ResourceModel(resource).save();
                 return rsc._id;
               } catch (err1) {
