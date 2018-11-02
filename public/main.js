@@ -11,3 +11,20 @@ const sections = app.service('sections');
 const playlists = app.service('playlists');
 
 
+
+class Auth {
+    constructor(){
+     
+        this.getCredentials = this.getCredentials.bind(this);
+    }
+
+    // Retrieve email/password object from the login/signup page
+    getCredentials = () => {
+        const user = {
+        email: document.querySelector('[name="email"]').value,
+        password: document.querySelector('[name="password"]').value
+        };
+    
+        return user;
+    };
+}

@@ -21,3 +21,7 @@ section{
   margin: 20px 0px 20px 0px;
   border: 2px solid slateblue;
 }
+
+#auth{
+  flex-wrap: wrap;
+}
