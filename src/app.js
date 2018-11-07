@@ -10,7 +10,6 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
-
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
@@ -26,7 +25,18 @@ const app = express(feathers());
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet());
+
+/**  default config for cors()
+{
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+*/
 app.use(cors());
+// app.options('*', cors())  
+
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -6,62 +6,52 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
     <link rel="stylesheet" href="/style.css">
   </head>
-  <body>
-    <main class="container">
-        <!-- Login & Register -->
-        <section id="auth" class="columns col-12 col-mx-auto p-2 col-oneline">
-          <!-- register -->
-          <section id="register-section" class="column col-4 form-area p-2">
-              <small>Register and Login</small>
-              <div class="">
-                  <p>Hello! Welcome to a testing page.</p>
-              </div>
-            </section>
-          <!-- register -->
-          <section id="register-section" class="column col-4 form-area p-2">
-            <small>Create Account</small>
-            <div class="form-group">
-                <label class="form-label" for="register-email">Email</label>
-                <input class="form-input" type="text" id="register-email" placeholder="test1@test.com">
-                <label class="form-label" for="register-password">Password</label>
-                <input class="form-input" type="password" id="register-password" placeholder="test1"> <br>
-                <input class="btn btn-sucess" type="submit" id="register-submit" value="Register!">
-              </div>
+  <body class="container">
+      <header class="navbar p-2 mt-2">
+          <section class="navbar-section">
+            <a href="#" class="navbar-brand mr-2">HELLO</a>
+            <a href="#" class="btn btn-link">Login</a>
+            <a href="#" class="btn btn-link">Register</a>
           </section>
-          <!-- login -->
-          <section id="login-section" class="column col-4 form-area p-2">
-            <small>Login</small>
-            <div class="form-group">
-                <label class="form-label" for="login-email">Email</label>
-                <input class="form-input" type="text" id="login-email" placeholder="test1@test.com">
-                <label class="form-label" for="login-password">Password</label>
-                <input class="form-input" type="password" id="login-password" placeholder="test1"><br>
-                <input class="btn btn-sucess" type="submit" id="login-submit" value="Login!">
-              </div>
+          <section class="navbar-section">
+            <div class="input-group input-inline">
+              <input class="form-input" type="text" placeholder="Quick Submit URL">
+              <button class="btn btn-primary input-group-btn">Submit 🚀</button>
+            </div>
           </section>
-        </section>
+      </header>
 
-        <section class="columns col-8  col-mx-auto p-2">
-            <h3>View Resources</h3>
-        </section>
-
-        <section class="columns col-8  col-mx-auto p-2">
-          <h3>Create Resources</h3>
-        </section>
-
-        <section class="columns col-8  col-mx-auto p-2">
-            <h3>Create Sections</h3>
-        </section>
-
-
-        <section class="columns col-8  col-mx-auto p-2">
-            <h3>Create Playlists</h3>
-        </section>
-
-
-
+    <main>
+        
         
     </main>
+
+    <!-- Login & Register -->
+    <section id="auth" class="columns col-8  col-mx-auto p-2">
+        <h2>Test the registration and login</h2>
+        <!-- register -->
+        <section id="register-section" class="column col-12 form-area p-2">
+          <h3>Create Account</h3>
+          <div class="form-group">
+              <label class="form-label" for="register-email">Email</label>
+              <input class="form-input" type="text" id="register-email" placeholder="test1@test.com">
+              <label class="form-label" for="register-password">Password</label>
+              <input class="form-input" type="password" id="register-password" placeholder="test1"> <br>
+              <input class="btn btn-sucess" type="submit" id="register-submit" value="Register!">
+            </div>
+        </section>
+        <!-- login -->
+        <section id="login-section" class="column col-12 form-area p-2">
+          <h3>Login</h3>
+          <div class="form-group">
+              <label class="form-label" for="login-email">Email</label>
+              <input class="form-input" type="text" id="login-email" placeholder="test1@test.com">
+              <label class="form-label" for="login-password">Password</label>
+              <input class="form-input" type="password" id="login-password" placeholder="test1"><br>
+              <input class="btn btn-sucess" type="submit" id="login-submit" value="Login!">
+            </div>
+        </section>
+      </section>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
     <script type="text/javascript" src="main.js"></script>
