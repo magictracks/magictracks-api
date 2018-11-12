@@ -10,8 +10,8 @@ const https  = require('https');
 
 // https server
 const server = https.createServer({
-  key: fs.readFileSync('config/privatekey_magictracks.pem'),
-  cert: fs.readFileSync('config/certificate.pem')
+  key: fs.readFileSync('config/key_magictracks.pem'),
+  cert: fs.readFileSync('config/certificate_magictracks.pem')
 }, app).listen(port);
 
 // Call app.setup to initialize all services and SocketIO

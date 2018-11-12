@@ -110,6 +110,6 @@ $RECYCLE.BIN/
 # Others
 lib/
 private/
-privatekey_magictracks.pem
-certificate.pem
+key_magictracks.pem
+certificate_magictracks.pem
 csr.csr
