@@ -217,12 +217,12 @@ module.exports = function (app) {
   } // end Handlers
 
   const handlers = new Handlers();
-  app.use('/sections', handlers.general);
-  app.use('/sections/id/:id', handlers.byId);
+  // app.use('/sections', handlers.general);
+  // app.use('/sections/id/:id', handlers.byId);
   app.use('/sections/addJSON', handlers.addJSON);
   // add hooks
-  app.service('/sections').hooks(hooks);
-  app.service('/sections/id/:id').hooks(hooks);
+  // app.service('/sections').hooks(hooks);
+  // app.service('/sections/id/:id').hooks(hooks);
   app.service('/sections/addJSON').hooks(hooks);
 
   // Initialize our service with any options it requires

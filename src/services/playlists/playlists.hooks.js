@@ -8,8 +8,23 @@ const sanitizeUser = require('../../hooks/sanitizeUser');
 // batchListUpdate()
 module.exports = {
   before: {
-    all: [  ],
-    find: [],
+    all: [],
+    find: [ async (context) => {
+      const { params } = context;
+      const { Model } = context.app.service(context.path);
+      const result = await Model.find(params.query)
+            .populate({
+              path: 'sections',
+              model: 'sections',
+              populate: {
+                path: 'resources',
+                model: 'resources'
+              }
+            })
+            .exec();
+      context.result = result;
+      return context;
+    }],
     get: [],
     create: [authenticate('jwt')],
     update: [authenticate('jwt')],

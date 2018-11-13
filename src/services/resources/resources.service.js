@@ -169,11 +169,11 @@ module.exports = function (app) {
   const handlers = new Handlers();
 
   // our routes
-  app.use('/resources', handlers.general);
-  app.use('/resources/id/:id', handlers.byId);
+  // app.use('/resources', handlers.general);
+  // app.use('/resources/id/:id', handlers.byId);
   // add in our service hooks
-  app.service('/resources').hooks(hooks);
-  app.service('/resources/id/:id').hooks(hooks);
+  // app.service('/resources').hooks(hooks);
+  // app.service('/resources/id/:id').hooks(hooks);
 
   // Initialize our service with any options it requires
   app.use('/resources', createService(options));

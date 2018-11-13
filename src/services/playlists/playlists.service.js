@@ -167,6 +167,36 @@ module.exports = function (app) {
         }
       };
 
+      /** 
+       * /playlists/id/:id
+       */
+      // get one
+      this.byUser = {
+        // find
+        async find(params) {
+          try {
+            const {
+              id
+            } = params.route;
+            const result = await Model.findOne({
+                submittedBy: id
+              })
+              .populate({
+                path: 'sections',
+                model: 'sections',
+                populate: {
+                  path: 'resources',
+                  model: 'resources'
+                }
+              })
+              .exec();
+            return result;
+          } catch (err) {
+            return err;
+          }
+        }
+      };
+
       this.addJSON = {
         /**
          * create()
@@ -249,13 +279,14 @@ module.exports = function (app) {
 
 
   handlers = new Handlers();
-  app.use('/playlists', handlers.general);
-  app.use('/playlists/id/:id', handlers.byId);
+  // app.use('/playlists', handlers.general);
+  // app.use('/playlists/user/:id', handlers.byUser);
+  // app.use('/playlists/id/:id', handlers.byId);
   app.use('/playlists/addJSON', handlers.addJSON);
   
   // hooks
-  app.service('/playlists').hooks(hooks);
-  app.service('/playlists/id/:id').hooks(hooks);
+  // app.service('/playlists').hooks(hooks);
+  // app.service('/playlists/id/:id').hooks(hooks);
   app.service('/playlists/addJSON').hooks(hooks);
 
   // Initialize our service with any options it requires
