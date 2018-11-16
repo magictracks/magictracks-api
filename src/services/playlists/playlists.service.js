@@ -215,13 +215,18 @@ module.exports = function (app) {
 
             let playlist;
             // create a playlist model which gives us a place to stuff in our ids
+
             
             data = Object.assign({
               submittedBy: params.user._id,
               collaborators: [params.user._id],
             }, data)
 
+
+
             playlist = new PlaylistModel(data);
+
+            console.log(playlist);
 
             // return an array of section ids after saving them with their respective resources
             playlist.sections = await Promise.all(data.sections.map(async (section) => {

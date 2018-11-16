@@ -1,4 +1,6 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const {
+  authenticate
+} = require('@feathersjs/authentication').hooks;
 // const populate = require('../../hooks/populate');
 const sanitizeUser = require('../../hooks/sanitizeUser');
 // const batchListUpdate = require('../../hooks/batch-list-update');
@@ -6,22 +8,28 @@ const sanitizeUser = require('../../hooks/sanitizeUser');
 // authenticate('jwt')
 // populate()
 // batchListUpdate()
+
+
 module.exports = {
   before: {
     all: [],
-    find: [ async (context) => {
-      const { params } = context;
-      const { Model } = context.app.service(context.path);
+    find: [async (context) => {
+      const {
+        params
+      } = context;
+      const {
+        Model
+      } = context.app.service(context.path);
       const result = await Model.find(params.query)
-            .populate({
-              path: 'sections',
-              model: 'sections',
-              populate: {
-                path: 'resources',
-                model: 'resources'
-              }
-            })
-            .exec();
+        .populate({
+          path: 'sections',
+          model: 'sections',
+          populate: {
+            path: 'resources',
+            model: 'resources'
+          }
+        })
+        .exec();
       context.result = result;
       return context;
     }],
@@ -38,7 +46,30 @@ module.exports = {
     get: [],
     create: [],
     update: [],
-    patch: [],
+    patch: [async (context) => {
+      const {
+        params
+      } = context;
+      const {
+        Model
+      } = context.app.service(context.path);
+
+      console.log("🌈🌈🌈🌈", context.id)
+      const result = await Model.find({_id: String(context.id) })
+        .populate({
+          path: 'sections',
+          model: 'sections',
+          populate: {
+            path: 'resources',
+            model: 'resources'
+          }
+        })
+        .exec();
+
+      context.result = result[0];
+      return context;
+
+    }],
     remove: []
   },
 
