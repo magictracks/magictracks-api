@@ -2,6 +2,7 @@ const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
 // const populate = require('../../hooks/populate');
+const addSubmittedBy = require('../../hooks/add-submitted-by');
 const sanitizeUser = require('../../hooks/sanitizeUser');
 // const batchListUpdate = require('../../hooks/batch-list-update');
 
@@ -33,8 +34,27 @@ module.exports = {
       context.result = result;
       return context;
     }],
-    get: [],
-    create: [authenticate('jwt')],
+    get: [async (context) => {
+        const {
+          params
+        } = context;
+        const {
+          Model
+        } = context.app.service(context.path);
+        const result = await Model.findOne({_id:context.id})
+          .populate({
+            path: 'sections',
+            model: 'sections',
+            populate: {
+              path: 'resources',
+              model: 'resources'
+            }
+          })
+          .exec();
+        context.result = result;
+        return context;
+    }],
+    create: [authenticate('jwt'), addSubmittedBy()],
     update: [authenticate('jwt')],
     patch: [authenticate('jwt')],
     remove: [authenticate('jwt')]

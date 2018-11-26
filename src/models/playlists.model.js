@@ -13,6 +13,11 @@ module.exports = function (app) {
       type: String,
       required: false
     },
+    featureType:{
+      type: String,
+      required: false,
+      default:"playlists"
+    },
     description: {
       type: String,
       required: false

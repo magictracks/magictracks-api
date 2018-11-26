@@ -11,7 +11,12 @@ module.exports = function (app) {
       type: Boolean,
       required: false,
       default: true
-    }
+    },
+    featureType:{
+      type: String,
+      required: false,
+      default:"comments"
+    },
   }, {
     timestamps: true
   });

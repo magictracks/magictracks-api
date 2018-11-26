@@ -9,7 +9,12 @@ module.exports = function(app) {
 
   const tags = new Schema(
     {
-      tag: { type: String, required: false }
+      tag: { type: String, required: false },
+      featureType:{
+        type: String,
+        required: false,
+        default:"tags"
+      },
     },
     {
       timestamps: true

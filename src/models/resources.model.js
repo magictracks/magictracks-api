@@ -13,7 +13,16 @@ module.exports = function (app) {
       type: String,
       required: false
     },
+    featureType:{
+      type: String,
+      required: false,
+      default:"resources"
+    },
     description: {
+      type: String,
+      required: false
+    },
+    metaDescription: {
       type: String,
       required: false
     },
