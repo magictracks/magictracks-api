@@ -9,8 +9,20 @@ const addSubmittedBy = require('../../hooks/add-submitted-by');
 module.exports = {
   before: {
     all: [  ],
-    find: [],
-    get: [],
+    find: [ async (context) => {
+      const { params } = context;
+      const { Model } = context.app.service(context.path);
+      const result = await Model.find(params.query);
+      context.result = result;
+      return context;
+    }],
+    get: [ async (context) => {
+      const { params } = context;
+      const { Model } = context.app.service(context.path);
+      const result = await Model.findOne({_id:context.id});
+      context.result = result;
+      return context;
+    }],
     create: [authenticate('jwt'), addSubmittedBy()],
     update: [authenticate('jwt')],
     patch: [authenticate('jwt')],
