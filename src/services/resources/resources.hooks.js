@@ -9,11 +9,12 @@ const addSubmittedBy = require('../../hooks/add-submitted-by');
 module.exports = {
   before: {
     all: [  ],
-    find: [ async (context) => {
+    find: [async (context) => {
       const { params } = context;
       const { Model } = context.app.service(context.path);
       const result = await Model.find(params.query);
-      context.result = result;
+      context.result = Object.assign({'data':[]}, context.result)
+      context.result.data = result;
       return context;
     }],
     get: [ async (context) => {
