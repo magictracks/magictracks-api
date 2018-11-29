@@ -7,8 +7,20 @@ const {
 module.exports = {
   before: {
     all: [],
-    find: [ authenticate('jwt') ],
-    get: [ authenticate('jwt') ],
+    find: [ async (context) => {
+      const { params } = context;
+      const { Model } = context.app.service(context.path);
+      const result = await Model.find(params.query);
+      context.result = result;
+      return context;
+    } ],
+    get: [ async (context) => {
+      const { params } = context;
+      const { Model } = context.app.service(context.path);
+      const result = await Model.find(params.query);
+      context.result = result;
+      return context;
+    } ],
     create: [ hashPassword() ],
     update: [ hashPassword(),  authenticate('jwt') ],
     patch: [ hashPassword(),  authenticate('jwt') ],
@@ -19,7 +31,7 @@ module.exports = {
     all: [ 
       // Make sure the password field is never sent to the client
       // Always must be the last hook
-      protect('password')
+      protect('password'),protect('email'), protect('permissions')
     ],
     find: [],
     get: [],
