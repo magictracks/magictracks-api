@@ -20,6 +20,10 @@ module.exports = {
               path: 'collaborators',
               model: 'users',
               select: 'username'
+            }).populate({
+              path:'submittedBy',
+              model: 'users',
+              select: 'username'
             })
             .exec();
       context.result = Object.assign({'data':[]}, context.result)
@@ -35,6 +39,10 @@ module.exports = {
             model: 'tags'
           }).populate({
             path: 'collaborators',
+            model: 'users',
+            select: 'username'
+          }).populate({
+            path:'submittedBy',
             model: 'users',
             select: 'username'
           })

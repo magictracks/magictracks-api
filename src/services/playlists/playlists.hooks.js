@@ -30,6 +30,10 @@ module.exports = {
         path: 'collaborators',
         model: 'users',
         select: 'username'
+      }).populate({
+        path:'submittedBy',
+        model: 'users',
+        select: 'username'
       })
       .exec();
       
@@ -57,6 +61,10 @@ module.exports = {
         model: 'tags'
       }).populate({
         path: 'collaborators',
+        model: 'users',
+        select: 'username'
+      }).populate({
+        path:'submittedBy',
         model: 'users',
         select: 'username'
       })
@@ -98,6 +106,10 @@ module.exports = {
         model: 'tags'
       }).populate({
         path: 'collaborators',
+        model: 'users',
+        select: 'username'
+      }).populate({
+        path:'submittedBy',
         model: 'users',
         select: 'username'
       })
