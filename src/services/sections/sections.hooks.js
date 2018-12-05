@@ -14,6 +14,13 @@ module.exports = {
             .populate({
               path: 'resources',
               model: 'resources',
+            }).populate({
+              path: 'tags',
+              model: 'tags'
+            }).populate({
+              path: 'collaborators',
+              model: 'users',
+              select: 'username'
             })
             .exec();
             context.result = Object.assign({'data':[]}, context.result)
@@ -27,6 +34,13 @@ module.exports = {
             .populate({
               path: 'resources',
               model: 'resources',
+            }).populate({
+              path: 'tags',
+              model: 'tags'
+            }).populate({
+              path: 'collaborators',
+              model: 'users',
+              select: 'username'
             })
             .exec();
       context.result = result;
@@ -57,6 +71,13 @@ module.exports = {
         .populate({
           path: 'resources',
           model: 'resources'
+        }).populate({
+          path: 'tags',
+          model: 'tags'
+        }).populate({
+          path: 'collaborators',
+          model: 'users',
+          select: 'username'
         })
         .exec();
 

@@ -16,15 +16,22 @@ module.exports = {
         Model
       } = context.app.service(context.path);
       const result = await Model.find(params.query)
-        .populate({
-          path: 'sections',
-          model: 'sections',
-          populate: {
-            path: 'resources',
-            model: 'resources'
-          }
-        })
-        .exec();
+      .populate({
+        path: 'sections',
+        model: 'sections',
+        populate:{
+          path: 'resources',
+          model: 'resources'
+        }
+      }).populate({
+        path: 'tags',
+        model: 'tags'
+      }).populate({
+        path: 'collaborators',
+        model: 'users',
+        select: 'username'
+      })
+      .exec();
       
       context.result = Object.assign({'data':[]}, context.result)
       context.result.data = result;
@@ -38,15 +45,22 @@ module.exports = {
         Model
       } = context.app.service(context.path);
       const result = await Model.findOne({_id:context.id})
-        .populate({
-          path: 'sections',
-          model: 'sections',
-          populate: {
-            path: 'resources',
-            model: 'resources'
-          }
-        })
-        .exec();
+      .populate({
+        path: 'sections',
+        model: 'sections',
+        populate:{
+          path: 'resources',
+          model: 'resources'
+        }
+      }).populate({
+        path: 'tags',
+        model: 'tags'
+      }).populate({
+        path: 'collaborators',
+        model: 'users',
+        select: 'username'
+      })
+      .exec();
       context.result = result;
       return context;
     }],
@@ -72,15 +86,22 @@ module.exports = {
 
       console.log("🌈🌈🌈🌈", context.id)
       const result = await Model.find({_id: String(context.id) })
-        .populate({
-          path: 'sections',
-          model: 'sections',
-          populate: {
-            path: 'resources',
-            model: 'resources'
-          }
-        })
-        .exec();
+      .populate({
+        path: 'sections',
+        model: 'sections',
+        populate:{
+          path: 'resources',
+          model: 'resources'
+        }
+      }).populate({
+        path: 'tags',
+        model: 'tags'
+      }).populate({
+        path: 'collaborators',
+        model: 'users',
+        select: 'username'
+      })
+      .exec();
 
       context.result = result[0];
       return context;

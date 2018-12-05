@@ -12,7 +12,16 @@ module.exports = {
     find: [async (context) => {
       const { params } = context;
       const { Model } = context.app.service(context.path);
-      const result = await Model.find(params.query);
+      const result = await Model.find(params.query)
+            .populate({
+              path: 'tags',
+              model: 'tags'
+            }).populate({
+              path: 'collaborators',
+              model: 'users',
+              select: 'username'
+            })
+            .exec();
       context.result = Object.assign({'data':[]}, context.result)
       context.result.data = result;
       return context;
@@ -20,7 +29,16 @@ module.exports = {
     get: [ async (context) => {
       const { params } = context;
       const { Model } = context.app.service(context.path);
-      const result = await Model.findOne({_id:context.id});
+      const result = await Model.findOne({_id:context.id})
+          .populate({
+            path: 'tags',
+            model: 'tags'
+          }).populate({
+            path: 'collaborators',
+            model: 'users',
+            select: 'username'
+          })
+          .exec();
       context.result = result;
       return context;
     }],
