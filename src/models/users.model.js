@@ -24,15 +24,6 @@ module.exports = function (app) {
     verified: {
       type: Boolean,
       default: false
-    },
-    permissions: {
-      type: Array,
-      default: ['resources::create', 'resources::update', 'resources::get', 'resources::find', 'resources::patch', 'resources::delete',
-        'sections::create', 'sections::get', 'sections::update', 'sections::find', 'sections::patch', 'sections::delete',
-        'playlists::create', 'playlists::get', 'playlists::update', 'playlists::find', 'playlists::patch', 'playlists::delete',
-        'tags::create', 'tags::get', 'tags::find', 'tags::update', 'tags::patch', 'tags::delete',
-        'comments::create', 'comments::get', 'comments::find', 'comments::update', 'comments::patch', 'comments::delete'
-      ]
     }
   }, {
     timestamps: true
