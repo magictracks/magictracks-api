@@ -8,6 +8,18 @@ module.exports = function (app) {
   const {
     Schema
   } = mongooseClient;
+  
+  const metaSchema = new Schema({
+    url: {type: String, required:false},
+    title: {type: String, required:false},
+    description: {type: String, required:false},
+    keywords: [{
+      type: String,
+      default: [],
+      required: false,
+    }]
+  })
+
   const resources = new Schema({
     title: {
       type: String,
@@ -22,10 +34,7 @@ module.exports = function (app) {
       type: String,
       required: false
     },
-    metaDescription: {
-      type: String,
-      required: false
-    },
+    meta: metaSchema,
     url: {
       type: String,
       required: false
