@@ -62,12 +62,7 @@ module.exports = function (app) {
       ref: 'resources',
       default: [],
       required: false
-    }],
-    editable:{
-      type: Boolean,
-      required: false,
-      default: true
-    }
+    }]
   }, {
     timestamps: true
   });

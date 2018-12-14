@@ -7,11 +7,6 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const comments = new Schema({
     text: { type: String, required: true },
-    editable:{
-      type: Boolean,
-      required: false,
-      default: true
-    },
     featureType:{
       type: String,
       required: false,
