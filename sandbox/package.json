@@ -1,0 +1,57 @@
+{
+  "name": "test-api",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "joeyklee",
+    "email": "jsphknglee@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^9.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "test": "npm run eslint && NODE_ENV= npm run jest",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "dev": "nodemon src/",
+    "client": "nodemon client/server.js",
+    "start": "node src/",
+    "jest": "jest"
+  },
+  "dependencies": {
+    "@feathersjs/configuration": "^2.0.4",
+    "@feathersjs/errors": "^3.3.4",
+    "@feathersjs/express": "^1.2.7",
+    "@feathersjs/feathers": "^3.2.3",
+    "@feathersjs/socketio": "^3.2.7",
+    "bankai": "^9.15.0",
+    "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "feathers-mongoose": "^6.1.4",
+    "helmet": "^3.13.0",
+    "http": "0.0.0",
+    "mongodb-core": "^3.1.7",
+    "mongoose": "^5.3.6",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "jest": "^23.4.1",
+    "nodemon": "^1.18.7",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
